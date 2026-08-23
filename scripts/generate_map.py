@@ -4,9 +4,9 @@ data_path = os.path.join(os.path.dirname(__file__), 'land_points.json')
 with open(data_path, 'r') as f:
     land_points = json.load(f)
 
-WIDTH, HEIGHT = 1000, 500
+WIDTH, HEIGHT = 1000, 520
 MAP_X0, MAP_Y0 = 35, 55
-MAP_W, MAP_H = 930, 395
+MAP_W, MAP_H = 930, 415
 
 def latlon_to_xy(lat, lon):
     lat_min, lat_max = -58.0, 75.0
@@ -16,40 +16,46 @@ def latlon_to_xy(lat, lon):
     return round(x, 1), round(y, 1)
 
 LOCATIONS = [
-    {"name": "CHANDIGARH",   "lat": 30.7333, "lon":  76.7794, "id": "01", "dir": (-76, -42)},
-    {"name": "NEW DELHI",    "lat": 28.6139, "lon":  77.2090, "id": "02", "dir": (-76, -18)},
-    {"name": "MUMBAI",       "lat": 19.0760, "lon":  72.8777, "id": "03", "dir": (-86, 4)},
-    {"name": "BANGALORE",    "lat": 12.9716, "lon":  77.5946, "id": "04", "dir": (-95, 24)},
-    {"name": "HYDERABAD",    "lat": 17.3850, "lon":  78.4867, "id": "05", "dir": (-20, 52)},
-    {"name": "CHENNAI",      "lat": 13.0827, "lon":  80.2707, "id": "06", "dir": (78, 38)},
-    {"name": "KOLKATA",      "lat": 22.5726, "lon":  88.3639, "id": "07", "dir": (78, 12)},
-    {"name": "BHOPAL",       "lat": 23.2599, "lon":  77.4126, "id": "08", "dir": (0, -32)},
-    {"name": "VELLORE",      "lat": 12.9165, "lon":  79.1325, "id": "09", "dir": (35, 72)},
-    {"name": "TRIPURA",      "lat": 23.8315, "lon":  91.2868, "id": "10", "dir": (78, -16)},
-    {"name": "MIAMI [USA]",  "lat": 25.7617, "lon": -80.1918, "id": "11", "dir": (-70, -25)},
-    {"name": "GERMANY [EU]", "lat": 51.1657, "lon":  10.4515, "id": "12", "dir": (-60, -28)},
+    {"name": "CHANDIGARH",    "lat": 30.7333, "lon":  76.7794, "id": "01", "dir": (-76, -42)},
+    {"name": "NEW DELHI",     "lat": 28.6139, "lon":  77.2090, "id": "02", "dir": (-76, -20)},
+    {"name": "MUMBAI",        "lat": 19.0760, "lon":  72.8777, "id": "03", "dir": (-86, 14)},
+    {"name": "BANGALORE",     "lat": 12.9716, "lon":  77.5946, "id": "04", "dir": (-95, 26)},
+    {"name": "HYDERABAD",     "lat": 17.3850, "lon":  78.4867, "id": "05", "dir": (-20, 54)},
+    {"name": "CHENNAI",       "lat": 13.0827, "lon":  80.2707, "id": "06", "dir": (78, 38)},
+    {"name": "KOLKATA",       "lat": 22.5726, "lon":  88.3639, "id": "07", "dir": (78, 12)},
+    {"name": "BHOPAL",        "lat": 23.2599, "lon":  77.4126, "id": "08", "dir": (0, -32)},
+    {"name": "VELLORE",       "lat": 12.9165, "lon":  79.1325, "id": "09", "dir": (35, 74)},
+    {"name": "TRIPURA",       "lat": 23.8315, "lon":  91.2868, "id": "10", "dir": (78, -16)},
+    {"name": "SURAT",         "lat": 21.1702, "lon":  72.8311, "id": "11", "dir": (-80, -4)},
+    {"name": "LONDON [UK]",   "lat": 51.5074, "lon":  -0.1278, "id": "12", "dir": (-68, -34)},
+    {"name": "GERMANY [EU]",  "lat": 51.1657, "lon":  10.4515, "id": "13", "dir": (22, -34)},
+    {"name": "FLORIDA [USA]", "lat": 27.6648, "lon": -81.5158, "id": "14", "dir": (-75, -28)},
+    {"name": "MIAMI [USA]",   "lat": 25.7617, "lon": -80.1918, "id": "15", "dir": (-75, 16)},
 ]
 
 ARCS = [
-    (0, 10, -75), # Chandigarh -> Miami
-    (0, 11, -42), # Chandigarh -> Germany
+    (0, 11, -55), # Chandigarh -> London
+    (0, 12, -45), # Chandigarh -> Germany
+    (0, 13, -78), # Chandigarh -> Florida
     (0, 1,  -8),  # Chandigarh -> New Delhi
     (0, 7,  -14), # Chandigarh -> Bhopal
-    (1, 10, -65), # New Delhi -> Miami
+    (1, 10, -10), # New Delhi -> Surat
+    (10, 2,  6),  # Surat -> Mumbai
     (7, 3,  -14), # Bhopal -> Bangalore
     (2, 6,  -14), # Mumbai -> Kolkata
     (5, 8,  8),   # Chennai -> Vellore
     (7, 4,  -10), # Bhopal -> Hyderabad
     (9, 6,  -10), # Tripura -> Kolkata
+    (11, 13, -40),# London -> Florida
+    (13, 14, 6),  # Florida -> Miami
 ]
 
-# GitHub Theme Tokens - High Contrast Visibility for Continents
 PANEL_BG = "#161b22"
 BORDER_DEFAULT = "#30363d"
 BORDER_MUTED = "#21262d"
 TEXT_PRIMARY = "#f0f6fc"
 TEXT_MUTED = "#8b949e"
-LAND_DOT_COLOR = "#8b949e"  # High visibility clear continent dots
+LAND_DOT_COLOR = "#8b949e"
 
 svg_lines = []
 svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}" width="100%" height="100%">
@@ -76,7 +82,6 @@ svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH
     </style>
   </defs>
 
-  <!-- 100% Transparent Overlay Frame -->
   <rect width="{WIDTH}" height="{HEIGHT}" rx="6" fill="none" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
 
   <!-- Faint Coordinate Grid Lines -->
@@ -97,10 +102,10 @@ svg_lines.append(f'  <rect x="{MAP_X0}" y="{MAP_Y0}" width="{MAP_W}" height="{MA
 svg_lines.append(f'''
   <!-- Header Bar -->
   <rect x="15" y="12" width="{WIDTH - 30}" height="32" rx="4" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
-  <text x="28" y="32" fill="{TEXT_PRIMARY}" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">CLIENT NETWORK // 12 GLOBAL HUBS</text>
+  <text x="28" y="32" fill="{TEXT_PRIMARY}" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">GLOBAL CLIENT NETWORK // 15 HUBS</text>
   <text x="{WIDTH - 145}" y="32" fill="{TEXT_MUTED}" font-size="10" font-weight="500" class="code-mono">[NAMAN GUPTA]</text>
 
-  <!-- Clear & High-Visibility Landmass Points (Continents) -->
+  <!-- High-Visibility Landmass Points -->
   <g fill="{LAND_DOT_COLOR}" opacity="0.75">
 ''')
 
@@ -118,9 +123,7 @@ for idx0, idx1, curve_h in ARCS:
     my = round((p0[1] + p1[1]) / 2.0 + curve_h, 1)
     
     path_d = f"M {p0[0]} {p0[1]} Q {mx} {my} {p1[0]} {p1[1]}"
-    # Base transit corridor in subtle border tone
     svg_lines.append(f'    <path d="{path_d}" fill="none" stroke="{BORDER_DEFAULT}" stroke-width="1.2" opacity="0.7"/>\n')
-    # Animated photon packet in GitHub primary white
     svg_lines.append(f'    <path d="{path_d}" fill="none" stroke="{TEXT_PRIMARY}" stroke-width="1.8" class="flow-arc"/>\n')
 
 svg_lines.append('  </g>\n\n  <!-- Location Beacons & Callouts -->\n  <g class="code-mono">\n')
@@ -152,11 +155,12 @@ svg_lines.append(f'''  </g>
 
   <!-- Footer Bar -->
   <rect x="15" y="{HEIGHT - 32}" width="{WIDTH - 30}" height="22" rx="3" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
-  <text x="26" y="{HEIGHT - 17}" fill="{TEXT_MUTED}" font-size="9.5" font-weight="500" class="code-mono">// 01: CHANDIGARH [30.73°N 76.78°E] | 12 CLIENT LOCATIONS | GITHUB.COM/NAMANINNOVATES</text>
+  <text x="26" y="{HEIGHT - 17}" fill="{TEXT_MUTED}" font-size="9.5" font-weight="500" class="code-mono">// 01: CHANDIGARH [30.73°N 76.78°E] | 15 GLOBAL HUBS | GITHUB.COM/NAMANINNOVATES</text>
 </svg>
 ''')
 
 target_path = os.path.join(os.path.dirname(__file__), '../assets/client_topology.svg')
+os.makedirs(os.path.dirname(target_path), exist_ok=True)
 with open(target_path, 'w') as f:
     f.writelines(svg_lines)
 
@@ -164,4 +168,4 @@ with open(target_path, 'w') as f:
 with open(os.path.join(os.path.dirname(__file__), '../assets/global_telemetry_map.svg'), 'w') as f:
     f.writelines(svg_lines)
 
-print("High-Visibility Continent Map SVG written successfully!")
+print("World Map SVG successfully updated with Florida, London, Surat (15 hubs total)!")

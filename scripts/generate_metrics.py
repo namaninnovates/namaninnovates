@@ -39,8 +39,8 @@ svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH
     <text x="30" y="108" fill="{TEXT_MUTED}" font-size="10.5">Repositories:</text>
     <text x="305" y="108" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">12</text>
     
-    <text x="30" y="136" fill="{TEXT_MUTED}" font-size="10.5">Stars Earned:</text>
-    <text x="305" y="136" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">1</text>
+    <text x="30" y="162" fill="{TEXT_MUTED}" font-size="10.5">Global Client Hubs:</text>
+    <text x="305" y="162" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">15</text>
   </g>
 
   <!-- Card 2: Languages -->
