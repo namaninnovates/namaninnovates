@@ -48,11 +48,10 @@ total_commits = cal["totalContributions"]
 weeks = cal["weeks"]
 num_weeks = len(weeks)
 
-# 2X SUPERSAMPLED RETINA RESOLUTION (2000x1040)
-WIDTH, HEIGHT = 2000, 1040
-CX, CY = 1000, 540
-R_MIN = 120
-R_MAX = 390
+WIDTH, HEIGHT = 1000, 520
+CX, CY = 500, 270
+R_MIN = 60
+R_MAX = 195
 
 BG_COLOR = (13, 17, 23, 255)       # #0d1117
 PANEL_BG = (22, 27, 34, 255)       # #161b22
@@ -62,9 +61,9 @@ TEXT_PRIMARY = (240, 246, 252, 255)# #f0f6fc
 TEXT_MUTED = (139, 148, 158, 255)  # #8b949e
 
 try:
-    font_mono_xs = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 18)
-    font_mono_sm = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 22)
-    font_mono_lg = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 26)
+    font_mono_xs = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 9)
+    font_mono_sm = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 11)
+    font_mono_lg = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 13)
 except Exception:
     font_mono_xs = ImageFont.load_default()
     font_mono_sm = ImageFont.load_default()
@@ -107,49 +106,48 @@ for frame_idx in range(TOTAL_FRAMES):
     img = Image.new("RGBA", (WIDTH, HEIGHT), BG_COLOR)
     draw = ImageDraw.Draw(img)
     
-    # Outer Border (2x width)
-    draw.rounded_rectangle([(0, 0), (WIDTH - 1, HEIGHT - 1)], radius=12, outline=BORDER_DEFAULT, width=2)
+    draw.rounded_rectangle([(0, 0), (WIDTH - 1, HEIGHT - 1)], radius=6, outline=BORDER_DEFAULT, width=1)
     
     # Header Bar
-    draw.rounded_rectangle([(30, 24), (WIDTH - 30, 88)], radius=8, fill=PANEL_BG, outline=BORDER_DEFAULT, width=2)
-    draw.text((56, 44), "RADIAL RADAR TELEMETRY // 360° PPI SCANNER", font=font_mono_sm, fill=TEXT_PRIMARY)
-    draw.text((WIDTH - 650, 44), f"TOTAL: {total_commits} COMMITS | 52 WEEKS ACTIVE", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(15, 12), (WIDTH - 15, 44)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
+    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° PPI SCANNER", font=font_mono_sm, fill=TEXT_PRIMARY)
+    draw.text((WIDTH - 325, 22), f"TOTAL: {total_commits} COMMITS | 52 WEEKS ACTIVE", font=font_mono_xs, fill=TEXT_MUTED)
     
-    # Concentric Orbit Rings (7 Weekday Circles)
+    # Concentric Orbit Rings
     for d in range(7):
         r = R_MIN + (d / 6.0) * (R_MAX - R_MIN)
-        draw.ellipse([(CX - r, CY - r), (CX + r, CY + r)], outline=BORDER_MUTED, width=2)
+        draw.ellipse([(CX - r, CY - r), (CX + r, CY + r)], outline=BORDER_MUTED, width=1)
         
-    draw.ellipse([(CX - (R_MAX + 30), CY - (R_MAX + 30)), (CX + (R_MAX + 30), CY + (R_MAX + 30))], outline=BORDER_DEFAULT, width=2)
-    draw.ellipse([(CX - (R_MIN - 24), CY - (R_MIN - 24)), (CX + (R_MIN - 24), CY + (R_MIN - 24))], outline=BORDER_DEFAULT, width=2)
+    draw.ellipse([(CX - (R_MAX + 15), CY - (R_MAX + 15)), (CX + (R_MAX + 15), CY + (R_MAX + 15))], outline=BORDER_DEFAULT, width=1)
+    draw.ellipse([(CX - (R_MIN - 12), CY - (R_MIN - 12)), (CX + (R_MIN - 12), CY + (R_MIN - 12))], outline=BORDER_DEFAULT, width=1)
     
     # Spokes & Month Labels
     for m_idx in range(12):
         a_deg = m_idx * 30.0
         a_rad = math.radians(a_deg - 90.0)
-        x1 = CX + (R_MIN - 24) * math.cos(a_rad)
-        y1 = CY + (R_MIN - 24) * math.sin(a_rad)
-        x2 = CX + (R_MAX + 30) * math.cos(a_rad)
-        y2 = CY + (R_MAX + 30) * math.sin(a_rad)
-        draw.line([(x1, y1), (x2, y2)], fill=BORDER_MUTED, width=2)
+        x1 = CX + (R_MIN - 12) * math.cos(a_rad)
+        y1 = CY + (R_MIN - 12) * math.sin(a_rad)
+        x2 = CX + (R_MAX + 15) * math.cos(a_rad)
+        y2 = CY + (R_MAX + 15) * math.sin(a_rad)
+        draw.line([(x1, y1), (x2, y2)], fill=BORDER_MUTED, width=1)
         
-        lx = CX + (R_MAX + 56) * math.cos(a_rad)
-        ly = CY + (R_MAX + 56) * math.sin(a_rad) - 10
-        draw.text((lx - 16, ly), months[m_idx], font=font_mono_xs, fill=TEXT_MUTED)
+        lx = CX + (R_MAX + 28) * math.cos(a_rad)
+        ly = CY + (R_MAX + 28) * math.sin(a_rad) - 5
+        draw.text((lx - 8, ly), months[m_idx], font=font_mono_xs, fill=TEXT_MUTED)
 
-    # 1. Dormant Background: Ultra faint resting dots
+    # 1. Dormant Nodes
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
         if diff >= SWEEP_TRAIL_DEG:
             nx, ny = node["x"], node["y"]
-            draw.ellipse([(nx - 1.8, ny - 1.8), (nx + 1.8, ny + 1.8)], fill=(24, 28, 35, 255))
+            draw.ellipse([(nx - 0.9, ny - 0.9), (nx + 0.9, ny + 0.9)], fill=(24, 28, 35, 255))
 
-    # 2. Phosphor Sweep Sector Gradient (Hi-Res Interpolation)
+    # 2. Phosphor Sweep Sector
     overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     ov_draw = ImageDraw.Draw(overlay)
     
-    steps = 60
+    steps = 40
     for s in range(steps):
         frac = s / float(steps)
         t_deg = (sweep_angle_deg - (1.0 - frac) * SWEEP_TRAIL_DEG) % 360.0
@@ -158,19 +156,18 @@ for frame_idx in range(TOTAL_FRAMES):
         t_rad_next = math.radians(t_deg_next - 90.0)
         
         alpha = int(48 * (frac ** 2.2))
-        p1 = (CX + (R_MIN - 20) * math.cos(t_rad), CY + (R_MIN - 20) * math.sin(t_rad))
-        p2 = (CX + (R_MAX + 30) * math.cos(t_rad), CY + (R_MAX + 30) * math.sin(t_rad))
-        p3 = (CX + (R_MAX + 30) * math.cos(t_rad_next), CY + (R_MAX + 30) * math.sin(t_rad_next))
-        p4 = (CX + (R_MIN - 20) * math.cos(t_rad_next), CY + (R_MIN - 20) * math.sin(t_rad_next))
+        p1 = (CX + (R_MIN - 10) * math.cos(t_rad), CY + (R_MIN - 10) * math.sin(t_rad))
+        p2 = (CX + (R_MAX + 15) * math.cos(t_rad), CY + (R_MAX + 15) * math.sin(t_rad))
+        p3 = (CX + (R_MAX + 15) * math.cos(t_rad_next), CY + (R_MAX + 15) * math.sin(t_rad_next))
+        p4 = (CX + (R_MIN - 10) * math.cos(t_rad_next), CY + (R_MIN - 10) * math.sin(t_rad_next))
         ov_draw.polygon([p1, p2, p3, p4], fill=(240, 246, 252, alpha))
         
-    # Primary Rotating Radar Laser Beam Line (4px width + halo)
-    beam_x = CX + (R_MAX + 30) * math.cos(sweep_angle_rad)
-    beam_y = CY + (R_MAX + 30) * math.sin(sweep_angle_rad)
-    ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(255, 255, 255, 245), width=4)
-    ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(240, 246, 252, 65), width=8)
+    # Main Sweep Beam Line
+    beam_x = CX + (R_MAX + 15) * math.cos(sweep_angle_rad)
+    beam_y = CY + (R_MAX + 15) * math.sin(sweep_angle_rad)
+    ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(255, 255, 255, 240), width=2)
     
-    # 3. Active Nodes: Circles ONLY illuminate on beam sweep contact!
+    # 3. Active Nodes: ONLY appear during sweep contact
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
@@ -180,72 +177,67 @@ for frame_idx in range(TOTAL_FRAMES):
             nx, ny = node["x"], node["y"]
             
             if count == 0:
-                # 0 Commits: Small resting grid dot
-                v = int(24 + (85 - 24) * decay)
-                ov_draw.ellipse([(nx - 2.0, ny - 2.0), (nx + 2.0, ny + 2.0)], fill=(v, v, v, 255))
+                v = int(24 + (75 - 24) * decay)
+                ov_draw.ellipse([(nx - 1.0, ny - 1.0), (nx + 1.0, ny + 1.0)], fill=(v, v, v, 255))
             elif count <= 2:
-                # 1-2 Commits: Medium glowing node
-                radius = 3.2 + 2.8 * decay
+                radius = 1.6 + 1.4 * decay
                 r_c = int(50 + 190 * decay)
                 g_c = int(60 + 190 * decay)
                 b_c = int(75 + 180 * decay)
                 ov_draw.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)], fill=(r_c, g_c, b_c, 255))
             elif count <= 7:
-                # 3-7 Commits: Intense and big radius
-                radius = 4.8 + 5.6 * decay
+                radius = 2.4 + 2.8 * decay
                 r_c = int(90 + 165 * decay)
                 g_c = int(105 + 150 * decay)
                 b_c = int(130 + 125 * decay)
                 ov_draw.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)], fill=(r_c, g_c, b_c, 255))
                 if decay > 0.4:
-                    ov_draw.ellipse([(nx - (radius + 3.0), ny - (radius + 3.0)), (nx + (radius + 3.0), ny + (radius + 3.0))], outline=(240, 246, 252, int(140 * decay)), width=2)
+                    ov_draw.ellipse([(nx - (radius + 1.5), ny - (radius + 1.5)), (nx + (radius + 1.5), ny + (radius + 1.5))], outline=(240, 246, 252, int(130 * decay)), width=1)
             else:
-                # 7+ Commits: Very high intensity pure white node
-                radius = 6.4 + 8.0 * decay
+                radius = 3.2 + 4.0 * decay
                 ov_draw.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)], fill=(255, 255, 255, 255))
                 if decay > 0.25:
-                    ring_r = radius + 4.4 * decay
-                    ov_draw.ellipse([(nx - ring_r, ny - ring_r), (nx + ring_r, ny + ring_r)], outline=(255, 255, 255, int(210 * decay)), width=2)
+                    ring_r = radius + 2.2 * decay
+                    ov_draw.ellipse([(nx - ring_r, ny - ring_r), (nx + ring_r, ny + ring_r)], outline=(255, 255, 255, int(200 * decay)), width=1)
 
     img = Image.alpha_composite(img, overlay)
     draw = ImageDraw.Draw(img)
 
     # Center Hub Pulse
     hub_phase = (frame_idx / float(TOTAL_FRAMES) * 2.0) % 1.0
-    hub_r = 8 + hub_phase * 36
+    hub_r = 4 + hub_phase * 18
     hub_alpha = int(180 * (1.0 - hub_phase))
-    draw.ellipse([(CX - hub_r, CY - hub_r), (CX + hub_r, CY + hub_r)], outline=(240, 246, 252, hub_alpha), width=2)
-    draw.ellipse([(CX - 6, CY - 6), (CX + 6, CY + 6)], fill=TEXT_PRIMARY)
-    draw.line([(CX - 16, CY), (CX + 16, CY)], fill=TEXT_PRIMARY, width=2)
-    draw.line([(CX, CY - 16), (CX, CY + 16)], fill=TEXT_PRIMARY, width=2)
+    draw.ellipse([(CX - hub_r, CY - hub_r), (CX + hub_r, CY + hub_r)], outline=(240, 246, 252, hub_alpha), width=1)
+    draw.ellipse([(CX - 3, CY - 3), (CX + 3, CY + 3)], fill=TEXT_PRIMARY)
+    draw.line([(CX - 8, CY), (CX + 8, CY)], fill=TEXT_PRIMARY, width=1)
+    draw.line([(CX, CY - 8), (CX, CY + 8)], fill=TEXT_PRIMARY, width=1)
 
     # Left & Right HUD Panels
-    draw.rounded_rectangle([(70, 360), (340, 500)], radius=8, fill=PANEL_BG, outline=BORDER_DEFAULT, width=2)
-    draw.text((90, 384), "// SCAN BEARING", font=font_mono_xs, fill=TEXT_MUTED)
-    draw.text((90, 420), f"{int(sweep_angle_deg):03d}° PPI", font=font_mono_lg, fill=TEXT_PRIMARY)
-    draw.text((90, 460), "STATUS: SCANNING", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(35, 180), (170, 250)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
+    draw.text((45, 192), "// SCAN BEARING", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.text((45, 210), f"{int(sweep_angle_deg):03d}° PPI", font=font_mono_lg, fill=TEXT_PRIMARY)
+    draw.text((45, 230), "STATUS: SCANNING", font=font_mono_xs, fill=TEXT_MUTED)
 
-    draw.rounded_rectangle([(WIDTH - 340, 360), (WIDTH - 70, 500)], radius=8, fill=PANEL_BG, outline=BORDER_DEFAULT, width=2)
-    draw.text((WIDTH - 320, 384), "// TOTAL COMMITS", font=font_mono_xs, fill=TEXT_MUTED)
-    draw.text((WIDTH - 320, 420), f"{total_commits} EVENTS", font=font_mono_lg, fill=TEXT_PRIMARY)
-    draw.text((WIDTH - 320, 460), "MAX PEAK: 65/DAY", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(WIDTH - 170, 180), (WIDTH - 35, 250)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
+    draw.text((WIDTH - 160, 192), "// TOTAL COMMITS", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.text((WIDTH - 160, 210), f"{total_commits} EVENTS", font=font_mono_lg, fill=TEXT_PRIMARY)
+    draw.text((WIDTH - 160, 230), "MAX PEAK: 65/DAY", font=font_mono_xs, fill=TEXT_MUTED)
 
     # Footer Bar
-    draw.rounded_rectangle([(30, HEIGHT - 68), (WIDTH - 30, HEIGHT - 24)], radius=6, fill=PANEL_BG, outline=BORDER_DEFAULT, width=2)
-    draw.text((52, HEIGHT - 46), "// 360° SYNCHRONIZED RADAR | RANGE: 52 WEEKS | GITHUB.COM/NAMANINNOVATES", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(15, HEIGHT - 34), (WIDTH - 15, HEIGHT - 12)], radius=3, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
+    draw.text((26, HEIGHT - 23), "// 360° SYNCHRONIZED RADAR | RANGE: 52 WEEKS | GITHUB.COM/NAMANINNOVATES", font=font_mono_xs, fill=TEXT_MUTED)
 
     img.save(f"{frames_dir}/frame_{frame_idx:03d}.png")
 
 target_gif = os.path.join(os.path.dirname(__file__), "../assets/radial_radar.gif")
 ffmpeg_bin = "/opt/homebrew/bin/ffmpeg" if os.path.exists("/opt/homebrew/bin/ffmpeg") else "ffmpeg"
 
-# High-Precision 256-Color Sierra2-4a Dithered Palette
 subprocess.run([
     ffmpeg_bin, "-y", "-r", "20",
     "-i", f"{frames_dir}/frame_%03d.png",
-    "-vf", "fps=20,scale=2000:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=256:stats_mode=diff[p];[s1][p]paletteuse=dither=bayer:bayer_scale=3:diff_mode=rectangle",
+    "-vf", "fps=20,scale=1000:-1:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=32:reserve_transparent=0[p];[s1][p]paletteuse=dither=none:diff_mode=rectangle",
     target_gif
 ], check=True)
 
 shutil.rmtree(frames_dir)
-print("Ultra-HD 2X Retina Radar GIF compiled successfully at:", target_gif)
+print("Restored original crisp GIF at:", target_gif)
