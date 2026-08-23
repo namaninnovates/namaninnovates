@@ -35,10 +35,12 @@ jobs:
         run: |
           python scripts/generate_map.py
           python scripts/generate_radar.py
+          python scripts/generate_metrics.py
+          python scripts/generate_stack.py
 
       - name: Commit & Push updated Assets
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add assets/client_topology.svg assets/radial_radar.gif
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): update continuous rescanning radar & map" && git push)
+          git add assets/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): update monochrome telemetry visualizers" && git push)

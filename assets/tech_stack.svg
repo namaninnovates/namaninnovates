@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 140" width="100%" height="100%">
+  <defs>
+    <style>
+      .code-mono {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      @keyframes badgePulse {
+        0%, 100% { border-color: #30363d; }
+        50% { border-color: #f0f6fc; }
+      }
+      @keyframes sweepScan {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      .chip {
+        transition: all 0.3s ease;
+      }
+    </style>
+  </defs>
+
+  <!-- 100% Transparent Outer Frame -->
+  <rect width="1000" height="140" rx="6" fill="none" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Header Strip -->
+  <rect x="15" y="10" width="970" height="26" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="26" y="27" fill="#f0f6fc" font-size="11" font-weight="600" class="code-mono">// STACK MATRIX // MONOCHROME CORE</text>
+  <text x="835" y="27" fill="#8b949e" font-size="9" font-weight="500" class="code-mono">14 ACTIVE MODULES</text>
+
+  <!-- Badges Grid (2 rows of 7 chips) -->
+  <g class="code-mono">
+    <!-- JAVA -->
+    <g class="chip">
+      <rect x="22" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="34" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="42" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">JAVA</text>
+      <text x="34" y="77" fill="#8b949e" font-size="7.5" font-weight="500">Backend / Core</text>
+    </g>
+    <!-- C / C++ -->
+    <g class="chip">
+      <rect x="161" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="173" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="181" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">C / C++</text>
+      <text x="173" y="77" fill="#8b949e" font-size="7.5" font-weight="500">Low-Level / Perf</text>
+    </g>
+    <!-- PYTHON -->
+    <g class="chip">
+      <rect x="300" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="312" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="320" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">PYTHON</text>
+      <text x="312" y="77" fill="#8b949e" font-size="7.5" font-weight="500">Data / AI / Scripting</text>
+    </g>
+    <!-- TYPESCRIPT -->
+    <g class="chip">
+      <rect x="439" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="451" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="459" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">TYPESCRIPT</text>
+      <text x="451" y="77" fill="#8b949e" font-size="7.5" font-weight="500">Strict Full-Stack</text>
+    </g>
+    <!-- JAVASCRIPT -->
+    <g class="chip">
+      <rect x="578" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="590" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="598" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">JAVASCRIPT</text>
+      <text x="590" y="77" fill="#8b949e" font-size="7.5" font-weight="500">Web Engine</text>
+    </g>
+    <!-- REACT -->
+    <g class="chip">
+      <rect x="717" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="729" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="737" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">REACT</text>
+      <text x="729" y="77" fill="#8b949e" font-size="7.5" font-weight="500">UI Components</text>
+    </g>
+    <!-- NEXT.JS -->
+    <g class="chip">
+      <rect x="856" y="46" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="868" cy="60" r="2" fill="#f0f6fc"/>
+      <text x="876" y="63" fill="#f0f6fc" font-size="10.5" font-weight="700">NEXT.JS</text>
+      <text x="868" y="77" fill="#8b949e" font-size="7.5" font-weight="500">SSR / Edge Framework</text>
+    </g>
+    <!-- NODE.JS -->
+    <g class="chip">
+      <rect x="22" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="34" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="42" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">NODE.JS</text>
+      <text x="34" y="123" fill="#8b949e" font-size="7.5" font-weight="500">Async Runtime</text>
+    </g>
+    <!-- EXPRESS -->
+    <g class="chip">
+      <rect x="161" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="173" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="181" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">EXPRESS</text>
+      <text x="173" y="123" fill="#8b949e" font-size="7.5" font-weight="500">REST Microservices</text>
+    </g>
+    <!-- TAILWIND -->
+    <g class="chip">
+      <rect x="300" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="312" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="320" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">TAILWIND</text>
+      <text x="312" y="123" fill="#8b949e" font-size="7.5" font-weight="500">Design Systems</text>
+    </g>
+    <!-- DOCKER -->
+    <g class="chip">
+      <rect x="439" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="451" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="459" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">DOCKER</text>
+      <text x="451" y="123" fill="#8b949e" font-size="7.5" font-weight="500">Containerization</text>
+    </g>
+    <!-- LINUX -->
+    <g class="chip">
+      <rect x="578" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="590" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="598" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">LINUX</text>
+      <text x="590" y="123" fill="#8b949e" font-size="7.5" font-weight="500">Kernel / POSIX</text>
+    </g>
+    <!-- GIT -->
+    <g class="chip">
+      <rect x="717" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="729" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="737" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">GIT</text>
+      <text x="729" y="123" fill="#8b949e" font-size="7.5" font-weight="500">VCS / CI-CD</text>
+    </g>
+    <!-- FIGMA -->
+    <g class="chip">
+      <rect x="856" y="92" width="132" height="40" rx="5" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="868" cy="106" r="2" fill="#f0f6fc"/>
+      <text x="876" y="109" fill="#f0f6fc" font-size="10.5" font-weight="700">FIGMA</text>
+      <text x="868" y="123" fill="#8b949e" font-size="7.5" font-weight="500">Interface Design</text>
+    </g>
+  </g>
+</svg>
