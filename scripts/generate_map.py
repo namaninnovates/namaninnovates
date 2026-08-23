@@ -1,6 +1,7 @@
 import json, math, os
 
-with open('/Users/guptanaman/.gemini/antigravity-ide/scratch/land_points.json', 'r') as f:
+data_path = os.path.join(os.path.dirname(__file__), 'land_points.json')
+with open(data_path, 'r') as f:
     land_points = json.load(f)
 
 WIDTH, HEIGHT = 1000, 500

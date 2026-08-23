@@ -36,7 +36,7 @@ try:
     cal = raw_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
 except Exception as e:
     print(f"Direct API call failed ({e}), checking local fallback...")
-    fallback_file = os.path.join(os.path.dirname(__file__), "../../../scratch/contributions.json")
+    fallback_file = os.path.join(os.path.dirname(__file__), "contributions.json")
     if os.path.exists(fallback_file):
         with open(fallback_file, "r") as f:
             raw_data = json.load(f)
