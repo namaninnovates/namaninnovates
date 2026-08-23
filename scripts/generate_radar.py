@@ -35,14 +35,10 @@ try:
         raw_data = json.loads(resp.read().decode("utf-8"))
     cal = raw_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
 except Exception as e:
-    print(f"Direct API call failed ({e}), checking local fallback...")
     fallback_file = os.path.join(os.path.dirname(__file__), "contributions.json")
-    if os.path.exists(fallback_file):
-        with open(fallback_file, "r") as f:
-            raw_data = json.load(f)
-        cal = raw_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
-    else:
-        raise e
+    with open(fallback_file, "r") as f:
+        raw_data = json.load(f)
+    cal = raw_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
 
 total_commits = cal["totalContributions"]
 weeks = cal["weeks"]
@@ -53,12 +49,12 @@ CX, CY = 500, 270
 R_MIN = 60
 R_MAX = 195
 
-BG_COLOR = (13, 17, 23, 255)       # #0d1117
-PANEL_BG = (22, 27, 34, 255)       # #161b22
-BORDER_DEFAULT = (48, 54, 61, 255) # #30363d
-BORDER_MUTED = (33, 38, 45, 255)   # #21262d
-TEXT_PRIMARY = (240, 246, 252, 255)# #f0f6fc
-TEXT_MUTED = (139, 148, 158, 255)  # #8b949e
+BG_RGB = (13, 17, 23)           # #0d1117 (Solid opaque background)
+PANEL_RGB = (22, 27, 34)        # #161b22
+BORDER_DEFAULT = (48, 54, 61)   # #30363d
+BORDER_MUTED = (33, 38, 45)     # #21262d
+TEXT_PRIMARY = (240, 246, 252)  # #f0f6fc
+TEXT_MUTED = (139, 148, 158)    # #8b949e
 
 try:
     font_mono_xs = ImageFont.truetype("/System/Library/Fonts/Menlo.ttc", 9)
@@ -79,11 +75,10 @@ for w_idx, week in enumerate(weeks):
         count = day["contributionCount"]
         d_idx = (day["weekday"] + 6) % 7
         r = R_MIN + (d_idx / 6.0) * (R_MAX - R_MIN)
-        
-        px = CX + r * math.cos(angle_rad)
-        py = CY + r * math.sin(angle_rad)
         day_nodes.append({
-            "x": px, "y": py, "r": r,
+            "x": CX + r * math.cos(angle_rad),
+            "y": CY + r * math.sin(angle_rad),
+            "r": r,
             "angle_deg": angle_deg,
             "angle_rad": angle_rad,
             "count": count
@@ -96,31 +91,31 @@ os.makedirs(frames_dir, exist_ok=True)
 
 TOTAL_FRAMES = 96
 SWEEP_TRAIL_DEG = 120.0
-
 months = ["AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL"]
 
 for frame_idx in range(TOTAL_FRAMES):
     sweep_angle_deg = (frame_idx / float(TOTAL_FRAMES)) * 360.0
     sweep_angle_rad = math.radians(sweep_angle_deg - 90.0)
     
-    img = Image.new("RGBA", (WIDTH, HEIGHT), BG_COLOR)
+    # 1. Solid opaque base canvas (No transparency drops!)
+    img = Image.new("RGBA", (WIDTH, HEIGHT), (*BG_RGB, 255))
     draw = ImageDraw.Draw(img)
     
-    # Frame Outline
-    draw.rounded_rectangle([(0, 0), (WIDTH - 1, HEIGHT - 1)], radius=6, outline=BORDER_DEFAULT, width=1)
+    # Outer Border
+    draw.rounded_rectangle([(0, 0), (WIDTH - 1, HEIGHT - 1)], radius=6, outline=(*BORDER_DEFAULT, 255), width=1)
     
     # Header Bar
-    draw.rounded_rectangle([(15, 12), (WIDTH - 15, 44)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
-    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° PPI SCANNER", font=font_mono_sm, fill=TEXT_PRIMARY)
-    draw.text((WIDTH - 325, 22), f"TOTAL: {total_commits} COMMITS | 52 WEEKS ACTIVE", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(15, 12), (WIDTH - 15, 44)], radius=4, fill=(*PANEL_RGB, 255), outline=(*BORDER_DEFAULT, 255), width=1)
+    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° PPI SCANNER", font=font_mono_sm, fill=(*TEXT_PRIMARY, 255))
+    draw.text((WIDTH - 325, 22), f"TOTAL: {total_commits} COMMITS | 52 WEEKS ACTIVE", font=font_mono_xs, fill=(*TEXT_MUTED, 255))
     
-    # Concentric Weekday Orbit Rings
+    # Concentric Weekday Rings
     for d in range(7):
         r = R_MIN + (d / 6.0) * (R_MAX - R_MIN)
-        draw.ellipse([(CX - r, CY - r), (CX + r, CY + r)], outline=BORDER_MUTED, width=1)
+        draw.ellipse([(CX - r, CY - r), (CX + r, CY + r)], outline=(*BORDER_MUTED, 255), width=1)
         
-    draw.ellipse([(CX - (R_MAX + 15), CY - (R_MAX + 15)), (CX + (R_MAX + 15), CY + (R_MAX + 15))], outline=BORDER_DEFAULT, width=1)
-    draw.ellipse([(CX - (R_MIN - 12), CY - (R_MIN - 12)), (CX + (R_MIN - 12), CY + (R_MIN - 12))], outline=BORDER_DEFAULT, width=1)
+    draw.ellipse([(CX - (R_MAX + 15), CY - (R_MAX + 15)), (CX + (R_MAX + 15), CY + (R_MAX + 15))], outline=(*BORDER_DEFAULT, 255), width=1)
+    draw.ellipse([(CX - (R_MIN - 12), CY - (R_MIN - 12)), (CX + (R_MIN - 12), CY + (R_MIN - 12))], outline=(*BORDER_DEFAULT, 255), width=1)
     
     # Month Spokes & Labels
     for m_idx in range(12):
@@ -130,13 +125,13 @@ for frame_idx in range(TOTAL_FRAMES):
         y1 = CY + (R_MIN - 12) * math.sin(a_rad)
         x2 = CX + (R_MAX + 15) * math.cos(a_rad)
         y2 = CY + (R_MAX + 15) * math.sin(a_rad)
-        draw.line([(x1, y1), (x2, y2)], fill=BORDER_MUTED, width=1)
+        draw.line([(x1, y1), (x2, y2)], fill=(*BORDER_MUTED, 255), width=1)
         
         lx = CX + (R_MAX + 28) * math.cos(a_rad)
         ly = CY + (R_MAX + 28) * math.sin(a_rad) - 5
-        draw.text((lx - 8, ly), months[m_idx], font=font_mono_xs, fill=TEXT_MUTED)
+        draw.text((lx - 8, ly), months[m_idx], font=font_mono_xs, fill=(*TEXT_MUTED, 255))
 
-    # 1. Dormant Nodes: Resting in subtle darkness (No bright circles when beam is away!)
+    # Dormant Nodes (Tiny subtle resting dots in background)
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
@@ -144,7 +139,7 @@ for frame_idx in range(TOTAL_FRAMES):
             nx, ny = node["x"], node["y"]
             draw.ellipse([(nx - 0.9, ny - 0.9), (nx + 0.9, ny + 0.9)], fill=(24, 28, 35, 255))
 
-    # 2. Smooth Phosphor Sweep Sector Wedge
+    # Phosphor Sweep Sector Wedge
     overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     ov_draw = ImageDraw.Draw(overlay)
     
@@ -168,7 +163,7 @@ for frame_idx in range(TOTAL_FRAMES):
     beam_y = CY + (R_MAX + 15) * math.sin(sweep_angle_rad)
     ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(255, 255, 255, 245), width=2)
     
-    # 3. Active Nodes: Ignite into bright white strictly when swept by the beam!
+    # Active Nodes (Ignite in real time under beam sweep)
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
@@ -178,18 +173,15 @@ for frame_idx in range(TOTAL_FRAMES):
             nx, ny = node["x"], node["y"]
             
             if count == 0:
-                # 0 Commits: Small resting grid dot
                 v = int(24 + (75 - 24) * decay)
                 ov_draw.ellipse([(nx - 1.0, ny - 1.0), (nx + 1.0, ny + 1.0)], fill=(v, v, v, 255))
             elif count <= 2:
-                # 1-2 Commits: Medium glowing node
                 radius = 1.6 + 1.4 * decay
                 r_c = int(50 + 190 * decay)
                 g_c = int(60 + 190 * decay)
                 b_c = int(75 + 180 * decay)
                 ov_draw.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)], fill=(r_c, g_c, b_c, 255))
             elif count <= 7:
-                # 3-7 Commits: Intense and big radius
                 radius = 2.4 + 2.8 * decay
                 r_c = int(90 + 165 * decay)
                 g_c = int(105 + 150 * decay)
@@ -197,8 +189,7 @@ for frame_idx in range(TOTAL_FRAMES):
                 ov_draw.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)], fill=(r_c, g_c, b_c, 255))
                 if decay > 0.35:
                     ov_draw.ellipse([(nx - (radius + 1.5), ny - (radius + 1.5)), (nx + (radius + 1.5), ny + (radius + 1.5))], outline=(240, 246, 252, int(140 * decay)), width=1)
-            else:
-                # 7+ Commits: Very high intensity (Clean circle, NO flare lines!)
+            else: # 7+ Commits (Clean high-contrast circle!)
                 radius = 3.4 + 4.2 * decay
                 ov_draw.ellipse([(nx - radius, ny - radius), (nx + radius, ny + radius)], fill=(255, 255, 255, 255))
                 if decay > 0.25:
@@ -213,32 +204,35 @@ for frame_idx in range(TOTAL_FRAMES):
     hub_r = 4 + hub_phase * 18
     hub_alpha = int(180 * (1.0 - hub_phase))
     draw.ellipse([(CX - hub_r, CY - hub_r), (CX + hub_r, CY + hub_r)], outline=(240, 246, 252, hub_alpha), width=1)
-    draw.ellipse([(CX - 3, CY - 3), (CX + 3, CY + 3)], fill=TEXT_PRIMARY)
-    draw.line([(CX - 8, CY), (CX + 8, CY)], fill=TEXT_PRIMARY, width=1)
-    draw.line([(CX, CY - 8), (CX, CY + 8)], fill=TEXT_PRIMARY, width=1)
+    draw.ellipse([(CX - 3, CY - 3), (CX + 3, CY + 3)], fill=(*TEXT_PRIMARY, 255))
+    draw.line([(CX - 8, CY), (CX + 8, CY)], fill=(*TEXT_PRIMARY, 255), width=1)
+    draw.line([(CX, CY - 8), (CX, CY + 8)], fill=(*TEXT_PRIMARY, 255), width=1)
 
     # Left & Right HUD Panels
-    draw.rounded_rectangle([(35, 180), (170, 250)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
-    draw.text((45, 192), "// SCAN BEARING", font=font_mono_xs, fill=TEXT_MUTED)
-    draw.text((45, 210), f"{int(sweep_angle_deg):03d}° PPI", font=font_mono_lg, fill=TEXT_PRIMARY)
-    draw.text((45, 230), "STATUS: SCANNING", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(35, 180), (170, 250)], radius=4, fill=(*PANEL_RGB, 255), outline=(*BORDER_DEFAULT, 255), width=1)
+    draw.text((45, 192), "// SCAN BEARING", font=font_mono_xs, fill=(*TEXT_MUTED, 255))
+    draw.text((45, 210), f"{int(sweep_angle_deg):03d}° PPI", font=font_mono_lg, fill=(*TEXT_PRIMARY, 255))
+    draw.text((45, 230), "STATUS: SCANNING", font=font_mono_xs, fill=(*TEXT_MUTED, 255))
 
-    draw.rounded_rectangle([(WIDTH - 170, 180), (WIDTH - 35, 250)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
-    draw.text((WIDTH - 160, 192), "// TOTAL COMMITS", font=font_mono_xs, fill=TEXT_MUTED)
-    draw.text((WIDTH - 160, 210), f"{total_commits} EVENTS", font=font_mono_lg, fill=TEXT_PRIMARY)
-    draw.text((WIDTH - 160, 230), "MAX PEAK: 65/DAY", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(WIDTH - 170, 180), (WIDTH - 35, 250)], radius=4, fill=(*PANEL_RGB, 255), outline=(*BORDER_DEFAULT, 255), width=1)
+    draw.text((WIDTH - 160, 192), "// TOTAL COMMITS", font=font_mono_xs, fill=(*TEXT_MUTED, 255))
+    draw.text((WIDTH - 160, 210), f"{total_commits} EVENTS", font=font_mono_lg, fill=(*TEXT_PRIMARY, 255))
+    draw.text((WIDTH - 160, 230), "MAX PEAK: 65/DAY", font=font_mono_xs, fill=(*TEXT_MUTED, 255))
 
     # Footer Bar
-    draw.rounded_rectangle([(15, HEIGHT - 34), (WIDTH - 15, HEIGHT - 12)], radius=3, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
-    draw.text((26, HEIGHT - 23), "// 360° SYNCHRONIZED RADAR | RANGE: 52 WEEKS | GITHUB.COM/NAMANINNOVATES", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.rounded_rectangle([(15, HEIGHT - 34), (WIDTH - 15, HEIGHT - 12)], radius=3, fill=(*PANEL_RGB, 255), outline=(*BORDER_DEFAULT, 255), width=1)
+    draw.text((26, HEIGHT - 23), "// 360° SYNCHRONIZED RADAR | RANGE: 52 WEEKS | GITHUB.COM/NAMANINNOVATES", font=font_mono_xs, fill=(*TEXT_MUTED, 255))
 
-    img.save(f"{frames_dir}/frame_{frame_idx:03d}.png")
+    # Convert to RGB image before saving so every frame is 100% solid opaque
+    rgb_img = img.convert("RGB")
+    rgb_img.save(f"{frames_dir}/frame_{frame_idx:03d}.png")
 
-target_gif_fresh = os.path.join(os.path.dirname(__file__), "../assets/radial_radar_scope.gif")
+target_gif_fresh = os.path.join(os.path.dirname(__file__), "../assets/radar_telemetry_ppi.gif")
+target_gif_scope = os.path.join(os.path.dirname(__file__), "../assets/radial_radar_scope.gif")
 target_gif_legacy = os.path.join(os.path.dirname(__file__), "../assets/radial_radar.gif")
 ffmpeg_bin = "/opt/homebrew/bin/ffmpeg" if os.path.exists("/opt/homebrew/bin/ffmpeg") else "ffmpeg"
 
-# High-fidelity palette generation with diff_mode=none to eliminate any inter-frame glitching
+# Compile with solid RGB frames and diff_mode=none to guarantee 100% frame stability (no disappearing/flashing)
 subprocess.run([
     ffmpeg_bin, "-y", "-r", "20",
     "-i", f"{frames_dir}/frame_%03d.png",
@@ -246,6 +240,7 @@ subprocess.run([
     target_gif_fresh
 ], check=True)
 
+shutil.copyfile(target_gif_fresh, target_gif_scope)
 shutil.copyfile(target_gif_fresh, target_gif_legacy)
 shutil.rmtree(frames_dir)
-print("Pristine, High-Fidelity Radar GIF compiled successfully at:", target_gif_fresh)
+print("Solid Opaque 100% Stable Radar GIF compiled successfully at:", target_gif_fresh)
