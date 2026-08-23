@@ -19,7 +19,7 @@
 <br>
 
 <div align="center">
-  <img src="./assets/github_metrics.svg" width="100%" alt="GitHub Metrics" />
+  <img src="./assets/telemetry_metrics.svg" width="100%" alt="GitHub Metrics" />
 </div>
 
 <br>

@@ -89,9 +89,12 @@ svg_lines.append(f'''  </g>
 </svg>
 ''')
 
-target_path = os.path.join(os.path.dirname(__file__), '../assets/github_metrics.svg')
-os.makedirs(os.path.dirname(target_path), exist_ok=True)
-with open(target_path, 'w') as f:
+target_path_fresh = os.path.join(os.path.dirname(__file__), '../assets/telemetry_metrics.svg')
+target_path_legacy = os.path.join(os.path.dirname(__file__), '../assets/github_metrics.svg')
+os.makedirs(os.path.dirname(target_path_fresh), exist_ok=True)
+with open(target_path_fresh, 'w') as f:
+    f.writelines(svg_lines)
+with open(target_path_legacy, 'w') as f:
     f.writelines(svg_lines)
 
-print("Clean Metrics SVG generated!")
+print("Metrics SVG generated with cache-busting filename:", target_path_fresh)
