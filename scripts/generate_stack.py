@@ -55,7 +55,8 @@ svg_lines.append('''  </g>
 </svg>
 ''')
 
-target_path = '/Users/guptanaman/.gemini/antigravity-ide/scratch/namaninnovates/assets/tech_stack.svg'
+target_path = os.path.join(os.path.dirname(__file__), '../assets/tech_stack.svg')
+os.makedirs(os.path.dirname(target_path), exist_ok=True)
 with open(target_path, 'w') as f:
     f.writelines(svg_lines)
 
