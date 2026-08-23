@@ -1,8 +1,8 @@
-name: Update Commit Topography Heatmap
+name: Update Contribution Telemetry Visualizers
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Run daily at midnight UTC
+    - cron: '0 0 * * *'
   workflow_dispatch:
   push:
     branches:
@@ -11,7 +11,7 @@ on:
       - 'scripts/**'
 
 jobs:
-  generate-topography:
+  generate-telemetry:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -28,15 +28,16 @@ jobs:
         run: |
           pip install numpy
 
-      - name: Generate Topographic Heatmap SVG
+      - name: Generate Visualizers
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           python scripts/generate_topography.py
+          python scripts/generate_radar.py
 
-      - name: Commit & Push updated SVG
+      - name: Commit & Push updated SVGs
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add assets/topographic_heatmap.svg
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): update 52-week topographic contour heatmap" && git push)
+          git add assets/topographic_heatmap.svg assets/radial_radar_heatmap.svg
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): update contribution visualizers" && git push)

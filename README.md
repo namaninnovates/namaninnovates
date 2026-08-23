@@ -9,10 +9,10 @@
 
 ---
 
-### ACTIVITY TOPOGRAPHY
+### RADIAL TELEMETRY
 
 <div align="center">
-  <img src="./assets/topographic_heatmap.svg" width="100%" alt="52-Week Commit Topography" />
+  <img src="./assets/radial_radar_heatmap.svg" width="100%" alt="360 Polar Contribution Radar" />
 </div>
 
 ---
