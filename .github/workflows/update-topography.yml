@@ -26,18 +26,19 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install numpy
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install numpy pillow
 
       - name: Generate Visualizers
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python scripts/generate_topography.py
+          python scripts/generate_map.py
           python scripts/generate_radar.py
 
-      - name: Commit & Push updated SVGs
+      - name: Commit & Push updated Assets
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add assets/topographic_heatmap.svg assets/radial_radar_heatmap.svg
-          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): update contribution visualizers" && git push)
+          git add assets/client_topology.svg assets/radial_radar.gif
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(telemetry): update continuous rescanning radar & map" && git push)

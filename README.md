@@ -12,7 +12,7 @@
 ### RADIAL TELEMETRY
 
 <div align="center">
-  <img src="./assets/radial_radar.svg" width="100%" alt="360 Polar Contribution Radar" />
+  <img src="./assets/radial_radar.gif" width="100%" alt="360 Polar Contribution Radar" />
 </div>
 
 ---
