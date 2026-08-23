@@ -42,12 +42,13 @@ ARCS = [
     (9, 6,  -10), # Tripura -> Kolkata
 ]
 
+# GitHub Theme Tokens - High Contrast Visibility for Continents
 PANEL_BG = "#161b22"
 BORDER_DEFAULT = "#30363d"
 BORDER_MUTED = "#21262d"
 TEXT_PRIMARY = "#f0f6fc"
 TEXT_MUTED = "#8b949e"
-LAND_DOT = "#30363d"
+LAND_DOT_COLOR = "#8b949e"  # High visibility clear continent dots
 
 svg_lines = []
 svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}" width="100%" height="100%">
@@ -74,16 +75,16 @@ svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH
     </style>
   </defs>
 
-  <!-- 100% Transparent Overlay -->
+  <!-- 100% Transparent Overlay Frame -->
   <rect width="{WIDTH}" height="{HEIGHT}" rx="6" fill="none" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
 
   <!-- Faint Coordinate Grid Lines -->
 ''')
 
 for x in range(MAP_X0, MAP_X0 + MAP_W + 1, 62):
-    svg_lines.append(f'  <line x1="{x}" y1="{MAP_Y0}" x2="{x}" y2="{MAP_Y0 + MAP_H}" stroke="{BORDER_MUTED}" stroke-width="1"/>\n')
+    svg_lines.append(f'  <line x1="{x}" y1="{MAP_Y0}" x2="{x}" y2="{MAP_Y0 + MAP_H}" stroke="{BORDER_MUTED}" stroke-width="1" opacity="0.5"/>\n')
 for y in range(MAP_Y0, MAP_Y0 + MAP_H + 1, 44):
-    svg_lines.append(f'  <line x1="{MAP_X0}" y1="{y}" x2="{MAP_X0 + MAP_W}" y2="{y}" stroke="{BORDER_MUTED}" stroke-width="1"/>\n')
+    svg_lines.append(f'  <line x1="{MAP_X0}" y1="{y}" x2="{MAP_X0 + MAP_W}" y2="{y}" stroke="{BORDER_MUTED}" stroke-width="1" opacity="0.5"/>\n')
 
 eq_y = latlon_to_xy(0, 0)[1]
 pm_x = latlon_to_xy(0, 0)[0]
@@ -98,14 +99,14 @@ svg_lines.append(f'''
   <text x="28" y="32" fill="{TEXT_PRIMARY}" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">CLIENT NETWORK // 12 GLOBAL HUBS</text>
   <text x="{WIDTH - 145}" y="32" fill="{TEXT_MUTED}" font-size="10" font-weight="500" class="code-mono">[NAMAN GUPTA]</text>
 
-  <!-- Landmass Points -->
-  <g fill="{LAND_DOT}">
+  <!-- Clear & High-Visibility Landmass Points (Continents) -->
+  <g fill="{LAND_DOT_COLOR}" opacity="0.75">
 ''')
 
 for lat, lon in land_points:
     if -58 <= lat <= 75 and -170 <= lon <= 180:
         px, py = latlon_to_xy(lat, lon)
-        svg_lines.append(f'    <circle cx="{px}" cy="{py}" r="1.1"/>\n')
+        svg_lines.append(f'    <circle cx="{px}" cy="{py}" r="1.3"/>\n')
 
 svg_lines.append('  </g>\n\n  <!-- Transit Arcs -->\n  <g>\n')
 
@@ -116,8 +117,10 @@ for idx0, idx1, curve_h in ARCS:
     my = round((p0[1] + p1[1]) / 2.0 + curve_h, 1)
     
     path_d = f"M {p0[0]} {p0[1]} Q {mx} {my} {p1[0]} {p1[1]}"
-    svg_lines.append(f'    <path d="{path_d}" fill="none" stroke="{BORDER_DEFAULT}" stroke-width="1" opacity="0.6"/>\n')
-    svg_lines.append(f'    <path d="{path_d}" fill="none" stroke="{TEXT_PRIMARY}" stroke-width="1.6" class="flow-arc"/>\n')
+    # Base transit corridor in subtle border tone
+    svg_lines.append(f'    <path d="{path_d}" fill="none" stroke="{BORDER_DEFAULT}" stroke-width="1.2" opacity="0.7"/>\n')
+    # Animated photon packet in GitHub primary white
+    svg_lines.append(f'    <path d="{path_d}" fill="none" stroke="{TEXT_PRIMARY}" stroke-width="1.8" class="flow-arc"/>\n')
 
 svg_lines.append('  </g>\n\n  <!-- Location Beacons & Callouts -->\n  <g class="code-mono">\n')
 
@@ -129,12 +132,12 @@ for i, loc in enumerate(LOCATIONS):
     
     pulse_cls = f"pulse-{(i % 3) + 1}"
     svg_lines.append(f'''    <!-- Node {loc["id"]}: {loc["name"]} -->
-    <circle cx="{nx}" cy="{ny}" r="3" fill="none" stroke="{TEXT_PRIMARY}" stroke-width="1" class="{pulse_cls}"/>
-    <line x1="{nx - 3}" y1="{ny}" x2="{nx + 3}" y2="{ny}" stroke="{TEXT_MUTED}" stroke-width="1"/>
-    <line x1="{nx}" y1="{ny - 3}" x2="{nx}" y2="{ny + 3}" stroke="{TEXT_MUTED}" stroke-width="1"/>
-    <circle cx="{nx}" cy="{ny}" r="2" fill="{TEXT_PRIMARY}"/>
+    <circle cx="{nx}" cy="{ny}" r="3.5" fill="none" stroke="{TEXT_PRIMARY}" stroke-width="1" class="{pulse_cls}"/>
+    <line x1="{nx - 4}" y1="{ny}" x2="{nx + 4}" y2="{ny}" stroke="{TEXT_MUTED}" stroke-width="1"/>
+    <line x1="{nx}" y1="{ny - 4}" x2="{nx}" y2="{ny + 4}" stroke="{TEXT_MUTED}" stroke-width="1"/>
+    <circle cx="{nx}" cy="{ny}" r="2.2" fill="{TEXT_PRIMARY}"/>
 ''')
-    svg_lines.append(f'    <line x1="{nx}" y1="{ny}" x2="{tx}" y2="{ty}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>\n')
+    svg_lines.append(f'    <line x1="{nx}" y1="{ny}" x2="{tx}" y2="{ty}" stroke="{BORDER_DEFAULT}" stroke-width="1.2"/>\n')
     
     label_txt = f"{loc['id']}::{loc['name']}"
     badge_w = len(label_txt) * 7.0 + 8
@@ -160,4 +163,4 @@ with open(target_path, 'w') as f:
 with open(os.path.join(os.path.dirname(__file__), '../assets/global_telemetry_map.svg'), 'w') as f:
     f.writelines(svg_lines)
 
-print("Client Topology SVG generated at:", target_path)
+print("High-Visibility Continent Map SVG written successfully!")
