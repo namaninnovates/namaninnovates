@@ -1,6 +1,6 @@
 import os
 
-WIDTH, HEIGHT = 1000, 155
+WIDTH, HEIGHT = 1000, 195
 PANEL_BG = "#161b22"
 BORDER_DEFAULT = "#30363d"
 TEXT_PRIMARY = "#f0f6fc"
@@ -8,8 +8,9 @@ TEXT_MUTED = "#8b949e"
 
 TECH = [
     "JAVA", "C / C++", "PYTHON", "TYPESCRIPT", "JAVASCRIPT", "REACT",
-    "NEXT.JS", "NODE.JS", "POSTGRESQL", "SUPABASE", "DOCKER", "GCP",
-    "VERCEL", "TAILWIND", "LINUX", "GIT", "FIGMA"
+    "NEXT.JS", "NODE.JS", "POSTGRESQL", "NEON", "SUPABASE", "DOCKER",
+    "GCP", "VERCEL", "ANTIGRAVITY", "GOOGLE VEO", "STITCH", "TAILWIND",
+    "LINUX", "GIT", "FIGMA", "PREMIERE PRO"
 ]
 
 cols = 6
@@ -48,7 +49,7 @@ for i, name in enumerate(TECH):
     svg_lines.append(f'''    <g>
       <rect x="{x}" y="{y}" width="{chip_w}" height="{chip_h}" rx="4" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
       <circle cx="{x + 12}" cy="{y + 16}" r="2" fill="{TEXT_PRIMARY}"/>
-      <text x="{x + 20}" y="{y + 20}" fill="{TEXT_PRIMARY}" font-size="10.5" font-weight="600">{name}</text>
+      <text x="{x + 20}" y="{y + 20}" fill="{TEXT_PRIMARY}" font-size="10" font-weight="600">{name}</text>
     </g>
 ''')
 
@@ -61,4 +62,4 @@ os.makedirs(os.path.dirname(target_path), exist_ok=True)
 with open(target_path, 'w') as f:
     f.writelines(svg_lines)
 
-print("Updated Tech Stack SVG generated successfully with PostgreSQL, GCP, Vercel, Supabase!")
+print(f"Tech Stack SVG updated with {len(TECH)} technologies!")

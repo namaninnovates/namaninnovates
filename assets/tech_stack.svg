@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 155" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 195" width="100%" height="100%">
   <defs>
     <style>
       .code-mono {
@@ -7,97 +7,122 @@
     </style>
   </defs>
 
-  <rect width="1000" height="155" rx="6" fill="none" stroke="#30363d" stroke-width="1"/>
+  <rect width="1000" height="195" rx="6" fill="none" stroke="#30363d" stroke-width="1"/>
 
   <!-- Header -->
   <text x="24" y="24" fill="#f0f6fc" font-size="11" font-weight="700" class="code-mono" letter-spacing="0.5">TECH STACK</text>
-  <text x="880" y="24" fill="#8b949e" font-size="9" font-weight="500" class="code-mono">17 TECHNOLOGIES</text>
+  <text x="880" y="24" fill="#8b949e" font-size="9" font-weight="500" class="code-mono">22 TECHNOLOGIES</text>
 
   <g class="code-mono">
     <g>
       <rect x="22" y="38" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="34" cy="54" r="2" fill="#f0f6fc"/>
-      <text x="42" y="58" fill="#f0f6fc" font-size="10.5" font-weight="600">JAVA</text>
+      <text x="42" y="58" fill="#f0f6fc" font-size="10" font-weight="600">JAVA</text>
     </g>
     <g>
       <rect x="183" y="38" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="195" cy="54" r="2" fill="#f0f6fc"/>
-      <text x="203" y="58" fill="#f0f6fc" font-size="10.5" font-weight="600">C / C++</text>
+      <text x="203" y="58" fill="#f0f6fc" font-size="10" font-weight="600">C / C++</text>
     </g>
     <g>
       <rect x="344" y="38" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="356" cy="54" r="2" fill="#f0f6fc"/>
-      <text x="364" y="58" fill="#f0f6fc" font-size="10.5" font-weight="600">PYTHON</text>
+      <text x="364" y="58" fill="#f0f6fc" font-size="10" font-weight="600">PYTHON</text>
     </g>
     <g>
       <rect x="505" y="38" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="517" cy="54" r="2" fill="#f0f6fc"/>
-      <text x="525" y="58" fill="#f0f6fc" font-size="10.5" font-weight="600">TYPESCRIPT</text>
+      <text x="525" y="58" fill="#f0f6fc" font-size="10" font-weight="600">TYPESCRIPT</text>
     </g>
     <g>
       <rect x="666" y="38" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="678" cy="54" r="2" fill="#f0f6fc"/>
-      <text x="686" y="58" fill="#f0f6fc" font-size="10.5" font-weight="600">JAVASCRIPT</text>
+      <text x="686" y="58" fill="#f0f6fc" font-size="10" font-weight="600">JAVASCRIPT</text>
     </g>
     <g>
       <rect x="827" y="38" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="839" cy="54" r="2" fill="#f0f6fc"/>
-      <text x="847" y="58" fill="#f0f6fc" font-size="10.5" font-weight="600">REACT</text>
+      <text x="847" y="58" fill="#f0f6fc" font-size="10" font-weight="600">REACT</text>
     </g>
     <g>
       <rect x="22" y="76" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="34" cy="92" r="2" fill="#f0f6fc"/>
-      <text x="42" y="96" fill="#f0f6fc" font-size="10.5" font-weight="600">NEXT.JS</text>
+      <text x="42" y="96" fill="#f0f6fc" font-size="10" font-weight="600">NEXT.JS</text>
     </g>
     <g>
       <rect x="183" y="76" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="195" cy="92" r="2" fill="#f0f6fc"/>
-      <text x="203" y="96" fill="#f0f6fc" font-size="10.5" font-weight="600">NODE.JS</text>
+      <text x="203" y="96" fill="#f0f6fc" font-size="10" font-weight="600">NODE.JS</text>
     </g>
     <g>
       <rect x="344" y="76" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="356" cy="92" r="2" fill="#f0f6fc"/>
-      <text x="364" y="96" fill="#f0f6fc" font-size="10.5" font-weight="600">POSTGRESQL</text>
+      <text x="364" y="96" fill="#f0f6fc" font-size="10" font-weight="600">POSTGRESQL</text>
     </g>
     <g>
       <rect x="505" y="76" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="517" cy="92" r="2" fill="#f0f6fc"/>
-      <text x="525" y="96" fill="#f0f6fc" font-size="10.5" font-weight="600">SUPABASE</text>
+      <text x="525" y="96" fill="#f0f6fc" font-size="10" font-weight="600">NEON</text>
     </g>
     <g>
       <rect x="666" y="76" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="678" cy="92" r="2" fill="#f0f6fc"/>
-      <text x="686" y="96" fill="#f0f6fc" font-size="10.5" font-weight="600">DOCKER</text>
+      <text x="686" y="96" fill="#f0f6fc" font-size="10" font-weight="600">SUPABASE</text>
     </g>
     <g>
       <rect x="827" y="76" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="839" cy="92" r="2" fill="#f0f6fc"/>
-      <text x="847" y="96" fill="#f0f6fc" font-size="10.5" font-weight="600">GCP</text>
+      <text x="847" y="96" fill="#f0f6fc" font-size="10" font-weight="600">DOCKER</text>
     </g>
     <g>
       <rect x="22" y="114" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="34" cy="130" r="2" fill="#f0f6fc"/>
-      <text x="42" y="134" fill="#f0f6fc" font-size="10.5" font-weight="600">VERCEL</text>
+      <text x="42" y="134" fill="#f0f6fc" font-size="10" font-weight="600">GCP</text>
     </g>
     <g>
       <rect x="183" y="114" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="195" cy="130" r="2" fill="#f0f6fc"/>
-      <text x="203" y="134" fill="#f0f6fc" font-size="10.5" font-weight="600">TAILWIND</text>
+      <text x="203" y="134" fill="#f0f6fc" font-size="10" font-weight="600">VERCEL</text>
     </g>
     <g>
       <rect x="344" y="114" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="356" cy="130" r="2" fill="#f0f6fc"/>
-      <text x="364" y="134" fill="#f0f6fc" font-size="10.5" font-weight="600">LINUX</text>
+      <text x="364" y="134" fill="#f0f6fc" font-size="10" font-weight="600">ANTIGRAVITY</text>
     </g>
     <g>
       <rect x="505" y="114" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="517" cy="130" r="2" fill="#f0f6fc"/>
-      <text x="525" y="134" fill="#f0f6fc" font-size="10.5" font-weight="600">GIT</text>
+      <text x="525" y="134" fill="#f0f6fc" font-size="10" font-weight="600">GOOGLE VEO</text>
     </g>
     <g>
       <rect x="666" y="114" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
       <circle cx="678" cy="130" r="2" fill="#f0f6fc"/>
-      <text x="686" y="134" fill="#f0f6fc" font-size="10.5" font-weight="600">FIGMA</text>
+      <text x="686" y="134" fill="#f0f6fc" font-size="10" font-weight="600">STITCH</text>
+    </g>
+    <g>
+      <rect x="827" y="114" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="839" cy="130" r="2" fill="#f0f6fc"/>
+      <text x="847" y="134" fill="#f0f6fc" font-size="10" font-weight="600">TAILWIND</text>
+    </g>
+    <g>
+      <rect x="22" y="152" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="34" cy="168" r="2" fill="#f0f6fc"/>
+      <text x="42" y="172" fill="#f0f6fc" font-size="10" font-weight="600">LINUX</text>
+    </g>
+    <g>
+      <rect x="183" y="152" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="195" cy="168" r="2" fill="#f0f6fc"/>
+      <text x="203" y="172" fill="#f0f6fc" font-size="10" font-weight="600">GIT</text>
+    </g>
+    <g>
+      <rect x="344" y="152" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="356" cy="168" r="2" fill="#f0f6fc"/>
+      <text x="364" y="172" fill="#f0f6fc" font-size="10" font-weight="600">FIGMA</text>
+    </g>
+    <g>
+      <rect x="505" y="152" width="153" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+      <circle cx="517" cy="168" r="2" fill="#f0f6fc"/>
+      <text x="525" y="172" fill="#f0f6fc" font-size="10" font-weight="600">PREMIERE PRO</text>
     </g>
   </g>
 </svg>
