@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 110" width="100%" height="100%">
+  <defs>
+    <style>
+      .code-mono {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      }
+      @keyframes blinkCursor {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      @keyframes typingName {
+        0% { width: 0; }
+        40%, 100% { width: 100%; }
+      }
+      @keyframes typingSubtitle {
+        0%, 40% { opacity: 0; width: 0; }
+        55% { opacity: 1; }
+        80%, 100% { opacity: 1; width: 100%; }
+      }
+      .cursor {
+        animation: blinkCursor 0.8s step-end infinite;
+      }
+      .name-line {
+        overflow: hidden;
+        white-space: nowrap;
+        display: inline-block;
+      }
+    </style>
+  </defs>
+
+  <!-- GitHub Dark Inset Card Frame -->
+  <rect width="1000" height="110" rx="6" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+
+  <!-- Top Terminal Status Bar -->
+  <rect x="12" y="10" width="976" height="24" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <circle cx="28" cy="22" r="3.5" fill="#3fb950"/>
+  <text x="38" y="25.5" fill="#3fb950" font-size="9" font-weight="600" class="code-mono">[SYS_AUTH: VERIFIED]</text>
+  <text x="190" y="25.5" fill="#8b949e" font-size="9" font-weight="500" class="code-mono">// IDENT_PROTOCOL: DECRYPT_SUCCESS // SEC_LEVEL: 01</text>
+  <text x="850" y="25.5" fill="#8b949e" font-size="9" font-weight="500" class="code-mono">PORT: 443 [LIVE]</text>
+
+  <!-- Decrypted Name Heading -->
+  <text x="28" y="66" fill="#f0f6fc" font-size="22" font-weight="700" class="code-mono" letter-spacing="1.5">// NAMAN GUPTA</text>
+  <rect x="235" y="49" width="10" height="20" fill="#f0f6fc" class="cursor"/>
+
+  <!-- Subtitle & Role Description -->
+  <text x="28" y="90" fill="#8b949e" font-size="11" font-weight="500" class="code-mono" letter-spacing="0.5">&gt; SOFTWARE ENGINEER // DISTRIBUTED SYSTEMS // FULL-STACK SAAS // 2026</text>
+</svg>
