@@ -13,7 +13,7 @@
 <br>
 
 <div align="center">
-  <img src="./assets/radar_telemetry.svg" width="100%" alt="Radial Contribution Radar" />
+  <img src="./assets/radial_radar_scope.gif" width="100%" alt="Radial Contribution Radar" />
 </div>
 
 <br>
