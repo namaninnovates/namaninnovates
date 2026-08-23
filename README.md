@@ -1,11 +1,11 @@
 <div align="center">
-  <img src="./assets/global_telemetry_map.svg" width="100%" alt="Location Topology" />
+  <img src="./assets/globe_bw.gif" width="100%" alt="Location Topology" />
 </div>
 
 <br>
 
 # NAMAN GUPTA
-`Software Engineer / Distributed Systems / Full-Stack`
+`Software Engineer / Full-Stack / Distributed Systems`
 
 ---
 
