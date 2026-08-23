@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&duration=3000&pause=1000&color=F0F6FC&background=161B2200&center=true&vCenter=true&width=800&height=55&lines=NAMAN+GUPTA;Software+Engineer;Full-Stack+%2B+Distributed+Systems" alt="Naman Gupta" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=28&duration=2800&pause=1000&color=F0F6FC&background=161B2200&center=true&vCenter=true&width=600&height=50&lines=Naman+Gupta;Creative;Curious;Collaborative" alt="Naman Gupta" />
   </a>
 </div>
 
