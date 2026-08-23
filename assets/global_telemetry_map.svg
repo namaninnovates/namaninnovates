@@ -61,7 +61,7 @@
 
   <!-- Header -->
   <rect x="15" y="12" width="970" height="32" fill="#000000" stroke="#222222" stroke-width="1"/>
-  <text x="28" y="32" fill="#FFFFFF" font-size="12" font-weight="700" class="mono" letter-spacing="1">LOCATION TOPOLOGY // 12 NODES</text>
+  <text x="28" y="32" fill="#FFFFFF" font-size="12" font-weight="700" class="mono" letter-spacing="1">CLIENT NETWORK // 12 GLOBAL HUBS</text>
   <text x="850" y="32" fill="#888888" font-size="10" font-weight="600" class="mono">[NAMAN GUPTA]</text>
 
   <!-- Landmass Points -->
@@ -1449,38 +1449,38 @@
 
   <!-- Transit Arcs -->
   <g>
-    <path d="M 692.4 208.7 Q 483.0 129.9 273.6 201.2" fill="none" stroke="#333333" stroke-width="1"/>
-    <path d="M 692.4 208.7 Q 483.0 129.9 273.6 201.2" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
-    <path d="M 692.4 208.7 Q 603.5 125.2 514.5 125.8" fill="none" stroke="#333333" stroke-width="1"/>
-    <path d="M 692.4 208.7 Q 603.5 125.2 514.5 125.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
+    <path d="M 690.7 186.5 Q 482.2 118.8 273.6 201.2" fill="none" stroke="#333333" stroke-width="1"/>
+    <path d="M 690.7 186.5 Q 482.2 118.8 273.6 201.2" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
+    <path d="M 690.7 186.5 Q 602.6 114.2 514.5 125.8" fill="none" stroke="#333333" stroke-width="1"/>
+    <path d="M 690.7 186.5 Q 602.6 114.2 514.5 125.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
+    <path d="M 690.7 186.5 Q 691.3 181.7 691.9 192.8" fill="none" stroke="#333333" stroke-width="1"/>
+    <path d="M 690.7 186.5 Q 691.3 181.7 691.9 192.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
+    <path d="M 690.7 186.5 Q 691.5 183.6 692.4 208.7" fill="none" stroke="#333333" stroke-width="1"/>
+    <path d="M 690.7 186.5 Q 691.5 183.6 692.4 208.7" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
     <path d="M 691.9 192.8 Q 482.8 132.0 273.6 201.2" fill="none" stroke="#333333" stroke-width="1"/>
     <path d="M 691.9 192.8 Q 482.8 132.0 273.6 201.2" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
     <path d="M 692.4 208.7 Q 692.6 209.9 692.9 239.2" fill="none" stroke="#333333" stroke-width="1"/>
     <path d="M 692.4 208.7 Q 692.6 209.9 692.9 239.2" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
-    <path d="M 692.4 208.7 Q 692.1 190.8 691.9 192.8" fill="none" stroke="#333333" stroke-width="1"/>
-    <path d="M 692.4 208.7 Q 692.1 190.8 691.9 192.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
     <path d="M 680.4 221.1 Q 701.0 201.9 721.5 210.7" fill="none" stroke="#333333" stroke-width="1"/>
     <path d="M 680.4 221.1 Q 701.0 201.9 721.5 210.7" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
     <path d="M 700.0 238.9 Q 698.5 247.2 697.0 239.4" fill="none" stroke="#333333" stroke-width="1"/>
     <path d="M 700.0 238.9 Q 698.5 247.2 697.0 239.4" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
     <path d="M 692.4 208.7 Q 693.8 207.4 695.3 226.1" fill="none" stroke="#333333" stroke-width="1"/>
     <path d="M 692.4 208.7 Q 693.8 207.4 695.3 226.1" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
-    <path d="M 690.7 186.5 Q 691.3 181.7 691.9 192.8" fill="none" stroke="#333333" stroke-width="1"/>
-    <path d="M 690.7 186.5 Q 691.3 181.7 691.9 192.8" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
     <path d="M 729.3 207.0 Q 725.4 198.8 721.5 210.7" fill="none" stroke="#333333" stroke-width="1"/>
     <path d="M 729.3 207.0 Q 725.4 198.8 721.5 210.7" fill="none" stroke="#FFFFFF" stroke-width="1.5" class="flow-arc"/>
   </g>
 
   <!-- Location Beacons & Callouts -->
   <g class="mono">
-    <!-- Node 01: BHOPAL -->
-    <circle cx="692.4" cy="208.7" r="3" fill="none" stroke="#FFFFFF" stroke-width="1" class="pulse-1"/>
-    <line x1="689.4" y1="208.7" x2="695.4" y2="208.7" stroke="#FFFFFF" stroke-width="1"/>
-    <line x1="692.4" y1="205.7" x2="692.4" y2="211.7" stroke="#FFFFFF" stroke-width="1"/>
-    <circle cx="692.4" cy="208.7" r="2" fill="#FFFFFF"/>
-    <line x1="692.4" y1="208.7" x2="692.4" y2="176.7" stroke="#555555" stroke-width="1"/>
-    <rect x="692.4" y="169.7" width="78.0" height="14" fill="#000000" stroke="#FFFFFF" stroke-width="1"/>
-    <text x="696.4" y="180.2" fill="#FFFFFF" font-size="8.5" font-weight="700">01::BHOPAL</text>
+    <!-- Node 01: CHANDIGARH -->
+    <circle cx="690.7" cy="186.5" r="3" fill="none" stroke="#FFFFFF" stroke-width="1" class="pulse-1"/>
+    <line x1="687.7" y1="186.5" x2="693.7" y2="186.5" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="690.7" y1="183.5" x2="690.7" y2="189.5" stroke="#FFFFFF" stroke-width="1"/>
+    <circle cx="690.7" cy="186.5" r="2" fill="#FFFFFF"/>
+    <line x1="690.7" y1="186.5" x2="614.7" y2="144.5" stroke="#555555" stroke-width="1"/>
+    <rect x="508.7" y="137.5" width="106.0" height="14" fill="#000000" stroke="#FFFFFF" stroke-width="1"/>
+    <text x="512.7" y="148.0" fill="#FFFFFF" font-size="8.5" font-weight="700">01::CHANDIGARH</text>
 
     <!-- Node 02: NEW DELHI -->
     <circle cx="691.9" cy="192.8" r="3" fill="none" stroke="#FFFFFF" stroke-width="1" class="pulse-2"/>
@@ -1536,14 +1536,14 @@
     <rect x="799.5" y="215.7" width="85.0" height="14" fill="#000000" stroke="#FFFFFF" stroke-width="1"/>
     <text x="803.5" y="226.2" fill="#FFFFFF" font-size="8.5" font-weight="700">07::KOLKATA</text>
 
-    <!-- Node 08: CHANDIGARH -->
-    <circle cx="690.7" cy="186.5" r="3" fill="none" stroke="#FFFFFF" stroke-width="1" class="pulse-2"/>
-    <line x1="687.7" y1="186.5" x2="693.7" y2="186.5" stroke="#FFFFFF" stroke-width="1"/>
-    <line x1="690.7" y1="183.5" x2="690.7" y2="189.5" stroke="#FFFFFF" stroke-width="1"/>
-    <circle cx="690.7" cy="186.5" r="2" fill="#FFFFFF"/>
-    <line x1="690.7" y1="186.5" x2="614.7" y2="141.5" stroke="#555555" stroke-width="1"/>
-    <rect x="508.7" y="134.5" width="106.0" height="14" fill="#000000" stroke="#FFFFFF" stroke-width="1"/>
-    <text x="512.7" y="145.0" fill="#FFFFFF" font-size="8.5" font-weight="700">08::CHANDIGARH</text>
+    <!-- Node 08: BHOPAL -->
+    <circle cx="692.4" cy="208.7" r="3" fill="none" stroke="#FFFFFF" stroke-width="1" class="pulse-2"/>
+    <line x1="689.4" y1="208.7" x2="695.4" y2="208.7" stroke="#FFFFFF" stroke-width="1"/>
+    <line x1="692.4" y1="205.7" x2="692.4" y2="211.7" stroke="#FFFFFF" stroke-width="1"/>
+    <circle cx="692.4" cy="208.7" r="2" fill="#FFFFFF"/>
+    <line x1="692.4" y1="208.7" x2="692.4" y2="176.7" stroke="#555555" stroke-width="1"/>
+    <rect x="692.4" y="169.7" width="78.0" height="14" fill="#000000" stroke="#FFFFFF" stroke-width="1"/>
+    <text x="696.4" y="180.2" fill="#FFFFFF" font-size="8.5" font-weight="700">08::BHOPAL</text>
 
     <!-- Node 09: VELLORE -->
     <circle cx="697.0" cy="239.4" r="3" fill="none" stroke="#FFFFFF" stroke-width="1" class="pulse-3"/>
@@ -1585,5 +1585,5 @@
 
   <!-- Footer Bar -->
   <rect x="15" y="468" width="970" height="22" fill="#000000" stroke="#222222" stroke-width="1"/>
-  <text x="26" y="483" fill="#888888" font-size="9.5" font-weight="600" class="mono">// ORIGIN: BHOPAL [23.26°N 77.41°E] | 12 LOCATIONS | GITHUB.COM/NAMANINNOVATES</text>
+  <text x="26" y="483" fill="#888888" font-size="9.5" font-weight="600" class="mono">// 01: CHANDIGARH [30.73°N 76.78°E] | 12 CLIENT LOCATIONS | GITHUB.COM/NAMANINNOVATES</text>
 </svg>
