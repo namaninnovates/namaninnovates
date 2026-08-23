@@ -1,25 +1,42 @@
-<!-- Header Section -->
 <div align="center">
-  <h1>Hey there, I'm <a href="https://github.com/namaninnovates">Naman Gupta</a> 👋</h1>
-  <a href="https://git.io/typing-svg">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=550&lines=Building+Scalable+SaaS+Solutions;Full-Stack+Developer+%26+UI%2FUX+Designer;AI-Driven+Workflows+%26+Automation;Passionate+about+Entrepreneurship+%26+Startups" alt="Typing SVG" />
-  </a>
+  <img src="./assets/global_globe_hud.gif" width="100%" alt="DATAV Global Collaboration & Telemetry Matrix" />
 </div>
 
 <br>
 
-<!-- About Me Section -->
-## ⚡ About Me
-
-- 🚀 **Building**: Scalable SaaS platforms, CRM systems, and AI-driven automation workflows
-- 💡 **Interests**: Entrepreneurship, Product Architecture, and Modern Full-Stack Engineering
-- 🛠️ **Problem Solving**: Active competitive programmer on [LeetCode](https://leetcode.com/u/namaninnovates/)
-- 🎨 **Design & Creative**: UI/UX Designer & Video Editor crafting polished digital experiences
+<div align="center">
+  <h1>⚡ NAMAN GUPTA ⚡</h1>
+  <p>
+    <a href="https://git.io/typing-svg">
+      <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=19&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=580&lines=Full-Stack+Architect+%26+SaaS+Builder;Global+Engineering+%26+Distributed+Systems;AI-Driven+Automations+%26+Workflows;UI%2FUX+Designer+%26+Product+Creator" alt="Typing SVG" />
+    </a>
+  </p>
+</div>
 
 ---
 
-<!-- GitHub Analytics Section -->
-## 📊 GitHub Analytics
+## 🌐 Global Impact & Collaboration Network
+
+> 🛰️ *Interactive telemetry mapped across active engineering hubs and client collaboration nodes worldwide.*
+
+| Region | Active Nodes & Collaborations | Focus Areas |
+| :--- | :--- | :--- |
+| 🇮🇳 **India Core** | **Bhopal** *(Central Hub)*, **New Delhi**, **Mumbai**, **Bangalore**, **Hyderabad**, **Chennai**, **Kolkata**, **Chandigarh**, **Vellore**, **Tripura** | SaaS Systems, CRM Platforms, High-Throughput Web Applications |
+| 🇺🇸 **North America** | **Miami, Florida** | SaaS Product Architecture & Cross-Border Delivery |
+| 🇩🇪 **Europe** | **Germany** | Enterprise Software Solutions & Distributed Engineering |
+
+---
+
+## ⚡ Mission Directives & About Me
+
+- 🚀 **Building**: Scalable SaaS platforms, modular CRM frameworks, and AI-driven automation workflows
+- 🌍 **Distributed Engineering**: Proven track record collaborating across **12 global nodes** across North America, Europe, and India
+- 🎨 **Creative & UX**: Blending robust software engineering with modern UI/UX design and video production
+- 💡 **Problem Solving**: Active competitive programmer solving complex algorithmic challenges on [LeetCode](https://leetcode.com/u/namaninnovates/)
+
+---
+
+## 📊 Live GitHub Telemetry
 
 <p align="center">
   <img src="https://github-readme-stats-fast.vercel.app/api?username=namaninnovates&show_icons=true&theme=tokyonight&hide_border=false&border_radius=10&bg_color=0d1117&title_color=38bdf8&icon_color=38bdf8&text_color=94a3b8&border_color=1e293b" height="165" alt="Naman's GitHub Stats" />
@@ -32,25 +49,24 @@
 
 ---
 
-<!-- Tech Stack Section -->
-## 🛠️ Tech Stack & Skills
+## 🛠️ Tech Stack & Ecosystem
 
 <p align="center">
-  <b>Languages</b><br>
+  <b>Core Languages</b><br>
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=java,c,cpp,python,js,ts,r,html,css&theme=dark" alt="Languages" />
   </a>
 </p>
 
 <p align="center">
-  <b>Frameworks & Ecosystem</b><br>
+  <b>Frameworks & Full-Stack</b><br>
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=react,nextjs,nodejs,express,tailwind,redux&theme=dark" alt="Frameworks" />
   </a>
 </p>
 
 <p align="center">
-  <b>Tools, Design & Systems</b><br>
+  <b>Tools, Design & Infrastructure</b><br>
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=figma,pr,vscode,git,github,postman,docker,linux,windows&theme=dark" alt="Tools" />
   </a>
@@ -58,8 +74,7 @@
 
 ---
 
-<!-- Connect & Socials Section -->
-## 📫 Connect With Me
+## 📫 Communication Channels & Connect
 
 <p align="center">
   <a href="https://www.linkedin.com/in/namangupta30/" target="_blank">
