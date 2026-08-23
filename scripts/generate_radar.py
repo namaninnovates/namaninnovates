@@ -72,8 +72,8 @@ except Exception:
 day_nodes = []
 for w_idx, week in enumerate(weeks):
     frac_w = w_idx / float(num_weeks)
-    angle_rad = frac_w * 2 * math.pi - math.pi / 2
-    angle_deg = math.degrees(angle_rad) % 360
+    angle_deg = frac_w * 360.0
+    angle_rad = math.radians(angle_deg - 90.0)
     
     for day in week["contributionDays"]:
         count = day["contributionCount"]
@@ -95,7 +95,7 @@ if os.path.exists(frames_dir):
 os.makedirs(frames_dir, exist_ok=True)
 
 TOTAL_FRAMES = 72
-SWEEP_TRAIL_DEG = 55.0
+SWEEP_TRAIL_DEG = 65.0
 
 months = ["AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL"]
 
@@ -109,8 +109,8 @@ for frame_idx in range(TOTAL_FRAMES):
     draw.rounded_rectangle([(0, 0), (WIDTH - 1, HEIGHT - 1)], radius=6, outline=BORDER_DEFAULT, width=1)
     
     draw.rounded_rectangle([(15, 12), (WIDTH - 15, 44)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
-    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° RESCANNING SWEEP", font=font_mono_sm, fill=TEXT_PRIMARY)
-    draw.text((WIDTH - 320, 22), f"TOTAL: {total_commits} COMMITS | ACTIVE SCAN", font=font_mono_xs, fill=TEXT_MUTED)
+    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° PPI SCANNER", font=font_mono_sm, fill=TEXT_PRIMARY)
+    draw.text((WIDTH - 315, 22), f"TOTAL: {total_commits} COMMITS | REAL-TIME PPI", font=font_mono_xs, fill=TEXT_MUTED)
     
     for d in range(7):
         r = R_MIN + (d / 6.0) * (R_MAX - R_MIN)
@@ -120,8 +120,8 @@ for frame_idx in range(TOTAL_FRAMES):
     draw.ellipse([(CX - (R_MIN - 12), CY - (R_MIN - 12)), (CX + (R_MIN - 12), CY + (R_MIN - 12))], outline=BORDER_DEFAULT, width=1)
     
     for m_idx in range(12):
-        a_deg = m_idx * 30.0 - 90.0
-        a_rad = math.radians(a_deg)
+        a_deg = m_idx * 30.0
+        a_rad = math.radians(a_deg - 90.0)
         x1 = CX + (R_MIN - 12) * math.cos(a_rad)
         y1 = CY + (R_MIN - 12) * math.sin(a_rad)
         x2 = CX + (R_MAX + 15) * math.cos(a_rad)
@@ -131,19 +131,31 @@ for frame_idx in range(TOTAL_FRAMES):
         lx = CX + (R_MAX + 28) * math.cos(a_rad)
         ly = CY + (R_MAX + 28) * math.sin(a_rad) - 5
         draw.text((lx - 8, ly), months[m_idx], font=font_mono_xs, fill=TEXT_MUTED)
-        
+
+    # 1. Dormant Day Nodes
+    for node in day_nodes:
+        ang = node["angle_deg"]
+        diff = (sweep_angle_deg - ang) % 360.0
+        if diff >= SWEEP_TRAIL_DEG:
+            count = node["count"]
+            nx, ny = node["x"], node["y"]
+            if count == 0:
+                draw.ellipse([(nx - 0.9, ny - 0.9), (nx + 0.9, ny + 0.9)], fill=(22, 27, 34, 255))
+            else:
+                draw.ellipse([(nx - 1.1, ny - 1.1), (nx + 1.1, ny + 1.1)], fill=(38, 44, 53, 255))
+
+    # 2. Phosphor Decay Sweep Sector
     overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     ov_draw = ImageDraw.Draw(overlay)
     
-    steps = 25
+    steps = 30
     for s in range(steps):
         frac = s / float(steps)
         t_deg = (sweep_angle_deg - (1.0 - frac) * SWEEP_TRAIL_DEG) % 360.0
         t_rad = math.radians(t_deg - 90.0)
         t_deg_next = (sweep_angle_deg - (1.0 - (s + 1) / float(steps)) * SWEEP_TRAIL_DEG) % 360.0
         t_rad_next = math.radians(t_deg_next - 90.0)
-        alpha = int(45 * (frac ** 2.2))
-        
+        alpha = int(50 * (frac ** 2.4))
         p1 = (CX + (R_MIN - 10) * math.cos(t_rad), CY + (R_MIN - 10) * math.sin(t_rad))
         p2 = (CX + (R_MAX + 15) * math.cos(t_rad), CY + (R_MAX + 15) * math.sin(t_rad))
         p3 = (CX + (R_MAX + 15) * math.cos(t_rad_next), CY + (R_MAX + 15) * math.sin(t_rad_next))
@@ -152,63 +164,37 @@ for frame_idx in range(TOTAL_FRAMES):
         
     beam_x = CX + (R_MAX + 15) * math.cos(sweep_angle_rad)
     beam_y = CY + (R_MAX + 15) * math.sin(sweep_angle_rad)
-    ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(255, 255, 255, 220), width=2)
+    ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(255, 255, 255, 240), width=2)
     
-    img = Image.alpha_composite(img, overlay)
-    draw = ImageDraw.Draw(img)
-    
+    # 3. Illuminated Targets (Only inside active sweep cone!)
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
         if diff < SWEEP_TRAIL_DEG:
-            afterglow = 1.0 - (diff / SWEEP_TRAIL_DEG) ** 1.5
-        else:
-            afterglow = 0.0
+            decay = ((SWEEP_TRAIL_DEG - diff) / SWEEP_TRAIL_DEG) ** 1.6
+            count = node["count"]
+            nx, ny = node["x"], node["y"]
             
-        count = node["count"]
-        nx, ny = node["x"], node["y"]
-        
-        if count == 0:
-            if afterglow > 0.3:
-                v = int(33 + 60 * afterglow)
-                draw.ellipse([(nx - 1.2, ny - 1.2), (nx + 1.2, ny + 1.2)], fill=(v, v, v, 255))
+            if count == 0:
+                v = int(22 + (60 - 22) * decay)
+                ov_draw.ellipse([(nx - 1.0, ny - 1.0), (nx + 1.0, ny + 1.0)], fill=(v, v, v, 255))
             else:
-                draw.ellipse([(nx - 1.0, ny - 1.0), (nx + 1.0, ny + 1.0)], fill=BORDER_MUTED)
-        else:
-            if count < 5:
-                base_col = (110, 118, 129, 255)
-                r_base = 1.8
-            elif count < 15:
-                base_col = (139, 148, 158, 255)
-                r_base = 2.4
-            elif count < 30:
-                base_col = (201, 209, 217, 255)
-                r_base = 3.2
-            else:
-                base_col = (240, 246, 252, 255)
-                r_base = 4.2
+                peak_intensity = min(255, int(140 + (count / 35.0) * 115))
+                v_decay = int(peak_intensity * decay)
+                blip_color = (v_decay, v_decay, v_decay, 255)
+                blip_radius = 1.6 + (min(count, 50) / 12.0) * decay
+                ov_draw.ellipse([(nx - blip_radius, ny - blip_radius), (nx + blip_radius, ny + blip_radius)], fill=blip_color)
                 
-            if afterglow > 0.05:
-                glow_r = r_base + 1.5 * afterglow
-                r_c = int(base_col[0] + (255 - base_col[0]) * afterglow)
-                g_c = int(base_col[1] + (255 - base_col[1]) * afterglow)
-                b_c = int(base_col[2] + (255 - base_col[2]) * afterglow)
-                draw.ellipse([(nx - glow_r, ny - glow_r), (nx + glow_r, ny + glow_r)], fill=(r_c, g_c, b_c, 255))
-                
-                if count >= 30:
-                    sp_r = R_MAX + 10 + min(count, 50) * 0.4
-                    sp_x = CX + sp_r * math.cos(node["angle_rad"])
-                    sp_y = CY + sp_r * math.sin(node["angle_rad"])
-                    flare_a = int(255 * afterglow)
-                    draw.line([(nx, ny), (sp_x, sp_y)], fill=(240, 246, 252, flare_a), width=1)
-                    draw.ellipse([(sp_x - 1.5, sp_y - 1.5), (sp_x + 1.5, sp_y + 1.5)], fill=(255, 255, 255, flare_a))
-            else:
-                draw.ellipse([(nx - r_base, ny - r_base), (nx + r_base, ny + r_base)], fill=base_col)
-                if count >= 30:
-                    sp_r = R_MAX + 8 + min(count, 50) * 0.4
-                    sp_x = CX + sp_r * math.cos(node["angle_rad"])
-                    sp_y = CY + sp_r * math.sin(node["angle_rad"])
-                    draw.line([(nx, ny), (sp_x, sp_y)], fill=BORDER_DEFAULT, width=1)
+                if count >= 20 and decay > 0.3:
+                    flare_len = 8 + (min(count, 65) / 65.0) * 20.0 * decay
+                    sp_x = CX + (node["r"] + flare_len) * math.cos(node["angle_rad"])
+                    sp_y = CY + (node["r"] + flare_len) * math.sin(node["angle_rad"])
+                    flare_alpha = int(240 * decay)
+                    ov_draw.line([(nx, ny), (sp_x, sp_y)], fill=(240, 246, 252, flare_alpha), width=1)
+                    ov_draw.ellipse([(sp_x - 1.2, sp_y - 1.2), (sp_x + 1.2, sp_y + 1.2)], fill=(255, 255, 255, flare_alpha))
+
+    img = Image.alpha_composite(img, overlay)
+    draw = ImageDraw.Draw(img)
 
     hub_phase = (frame_idx / float(TOTAL_FRAMES) * 2.0) % 1.0
     hub_r = 4 + hub_phase * 18
@@ -221,7 +207,7 @@ for frame_idx in range(TOTAL_FRAMES):
 
     draw.rounded_rectangle([(35, 180), (170, 250)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
     draw.text((45, 192), "// SCAN BEARING", font=font_mono_xs, fill=TEXT_MUTED)
-    draw.text((45, 210), f"{int(sweep_angle_deg):03d}° SWEEP", font=font_mono_lg, fill=TEXT_PRIMARY)
+    draw.text((45, 210), f"{int(sweep_angle_deg):03d}° PPI", font=font_mono_lg, fill=TEXT_PRIMARY)
     draw.text((45, 230), "STATUS: RESCANNING", font=font_mono_xs, fill=TEXT_MUTED)
 
     draw.rounded_rectangle([(WIDTH - 170, 180), (WIDTH - 35, 250)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
@@ -235,8 +221,8 @@ for frame_idx in range(TOTAL_FRAMES):
     img.save(f"{frames_dir}/frame_{frame_idx:03d}.png")
 
 target_gif = os.path.join(os.path.dirname(__file__), "../assets/radial_radar.gif")
-
 ffmpeg_bin = "/opt/homebrew/bin/ffmpeg" if os.path.exists("/opt/homebrew/bin/ffmpeg") else "ffmpeg"
+
 subprocess.run([
     ffmpeg_bin, "-y", "-r", "24",
     "-i", f"{frames_dir}/frame_%03d.png",
@@ -245,4 +231,4 @@ subprocess.run([
 ], check=True)
 
 shutil.rmtree(frames_dir)
-print("Rescanning Radar GIF compiled successfully at:", target_gif)
+print("Physically in-sync Radar GIF updated at:", target_gif)
