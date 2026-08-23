@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/global_telemetry_map.svg" width="100%" alt="Global Client Network" />
+  <img src="./assets/client_topology.svg" width="100%" alt="Global Client Network" />
 </div>
 
 <br>
@@ -12,7 +12,7 @@
 ### RADIAL TELEMETRY
 
 <div align="center">
-  <img src="./assets/radial_radar_heatmap.svg" width="100%" alt="360 Polar Contribution Radar" />
+  <img src="./assets/radial_radar.svg" width="100%" alt="360 Polar Contribution Radar" />
 </div>
 
 ---
