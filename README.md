@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/global_telemetry_map.svg" width="100%" alt="Locations Map" />
+  <img src="./assets/global_telemetry_map.svg" width="100%" alt="Location Topology" />
 </div>
 
 <br>
@@ -43,9 +43,7 @@
 
 ### STACK
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=java,c,cpp,python,js,ts,react,nextjs,nodejs,express,tailwind,git,github,docker,linux,figma&theme=dark" alt="Stack" />
-</p>
+`Java` · `C/C++` · `Python` · `TypeScript` · `JavaScript` · `React` · `Next.js` · `Node.js` · `Express` · `TailwindCSS` · `Docker` · `Linux` · `Git` · `Figma`
 
 ---
 
