@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/global_globe_hud.gif" width="100%" alt="Global Collaboration Network Topology" />
+  <img src="./assets/global_telemetry_map.svg" width="100%" alt="Global Collaboration Network Topology" />
 </div>
 
 <br>
