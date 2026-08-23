@@ -2,7 +2,7 @@
   <defs>
     <style>
       @keyframes pulseRing {
-        0% { r: 3; stroke-opacity: 0.8; }
+        0% { r: 3; stroke-opacity: 0.9; }
         100% { r: 15; stroke-opacity: 0; }
       }
       @keyframes flowPacket {
@@ -17,15 +17,19 @@
         animation: flowPacket 3.2s linear infinite;
       }
       .mono {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+      .code-mono {
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       }
     </style>
   </defs>
 
-  <!-- GitHub Native Background -->
-  <rect width="1000" height="500" fill="#0d1117" stroke="#30363d" stroke-width="1" rx="6"/>
+  <!-- 100% Transparent Background (Floats naturally on GitHub) -->
+  <!-- Outer Card Frame -->
+  <rect width="1000" height="500" rx="6" fill="none" stroke="#30363d" stroke-width="1"/>
 
-  <!-- Faint Grid -->
+  <!-- Faint Coordinate Grid Lines -->
   <line x1="35" y1="55" x2="35" y2="450" stroke="#21262d" stroke-width="1"/>
   <line x1="97" y1="55" x2="97" y2="450" stroke="#21262d" stroke-width="1"/>
   <line x1="159" y1="55" x2="159" y2="450" stroke="#21262d" stroke-width="1"/>
@@ -61,11 +65,11 @@
 
   <!-- Header Bar -->
   <rect x="15" y="12" width="970" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-  <text x="28" y="32" fill="#f0f6fc" font-size="12" font-weight="700" class="mono" letter-spacing="1">CLIENT NETWORK // 12 GLOBAL HUBS</text>
-  <text x="850" y="32" fill="#8b949e" font-size="10" font-weight="600" class="mono">[NAMAN GUPTA]</text>
+  <text x="28" y="32" fill="#f0f6fc" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">CLIENT NETWORK // 12 GLOBAL HUBS</text>
+  <text x="855" y="32" fill="#8b949e" font-size="10" font-weight="500" class="code-mono">[NAMAN GUPTA]</text>
 
   <!-- Landmass Points -->
-  <g fill="#21262d">
+  <g fill="#30363d">
     <circle cx="294.1" cy="435.7" r="1.1"/>
     <circle cx="288.5" cy="427.4" r="1.1"/>
     <circle cx="300.2" cy="427.4" r="1.1"/>
@@ -1472,7 +1476,7 @@
   </g>
 
   <!-- Location Beacons & Callouts -->
-  <g class="mono">
+  <g class="code-mono">
     <!-- Node 01: CHANDIGARH -->
     <circle cx="690.7" cy="186.5" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-1"/>
     <line x1="687.7" y1="186.5" x2="693.7" y2="186.5" stroke="#8b949e" stroke-width="1"/>
@@ -1480,7 +1484,7 @@
     <circle cx="690.7" cy="186.5" r="2" fill="#f0f6fc"/>
     <line x1="690.7" y1="186.5" x2="614.7" y2="144.5" stroke="#30363d" stroke-width="1"/>
     <rect x="508.7" y="137.5" width="106.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="512.7" y="148.0" fill="#f0f6fc" font-size="8.5" font-weight="700">01::CHANDIGARH</text>
+    <text x="512.7" y="148.0" fill="#f0f6fc" font-size="8.5" font-weight="600">01::CHANDIGARH</text>
 
     <!-- Node 02: NEW DELHI -->
     <circle cx="691.9" cy="192.8" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-2"/>
@@ -1489,7 +1493,7 @@
     <circle cx="691.9" cy="192.8" r="2" fill="#f0f6fc"/>
     <line x1="691.9" y1="192.8" x2="615.9" y2="174.8" stroke="#30363d" stroke-width="1"/>
     <rect x="516.9" y="167.8" width="99.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="520.9" y="178.3" fill="#f0f6fc" font-size="8.5" font-weight="700">02::NEW DELHI</text>
+    <text x="520.9" y="178.3" fill="#f0f6fc" font-size="8.5" font-weight="600">02::NEW DELHI</text>
 
     <!-- Node 03: MUMBAI -->
     <circle cx="680.4" cy="221.1" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-3"/>
@@ -1498,7 +1502,7 @@
     <circle cx="680.4" cy="221.1" r="2" fill="#f0f6fc"/>
     <line x1="680.4" y1="221.1" x2="594.4" y2="225.1" stroke="#30363d" stroke-width="1"/>
     <rect x="516.4" y="218.1" width="78.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="520.4" y="228.6" fill="#f0f6fc" font-size="8.5" font-weight="700">03::MUMBAI</text>
+    <text x="520.4" y="228.6" fill="#f0f6fc" font-size="8.5" font-weight="600">03::MUMBAI</text>
 
     <!-- Node 04: BANGALORE -->
     <circle cx="692.9" cy="239.2" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-1"/>
@@ -1507,7 +1511,7 @@
     <circle cx="692.9" cy="239.2" r="2" fill="#f0f6fc"/>
     <line x1="692.9" y1="239.2" x2="597.9" y2="263.2" stroke="#30363d" stroke-width="1"/>
     <rect x="498.9" y="256.2" width="99.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="502.9" y="266.7" fill="#f0f6fc" font-size="8.5" font-weight="700">04::BANGALORE</text>
+    <text x="502.9" y="266.7" fill="#f0f6fc" font-size="8.5" font-weight="600">04::BANGALORE</text>
 
     <!-- Node 05: HYDERABAD -->
     <circle cx="695.3" cy="226.1" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-2"/>
@@ -1516,7 +1520,7 @@
     <circle cx="695.3" cy="226.1" r="2" fill="#f0f6fc"/>
     <line x1="695.3" y1="226.1" x2="675.3" y2="278.1" stroke="#30363d" stroke-width="1"/>
     <rect x="576.3" y="271.1" width="99.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="580.3" y="281.6" fill="#f0f6fc" font-size="8.5" font-weight="700">05::HYDERABAD</text>
+    <text x="580.3" y="281.6" fill="#f0f6fc" font-size="8.5" font-weight="600">05::HYDERABAD</text>
 
     <!-- Node 06: CHENNAI -->
     <circle cx="700.0" cy="238.9" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-3"/>
@@ -1525,7 +1529,7 @@
     <circle cx="700.0" cy="238.9" r="2" fill="#f0f6fc"/>
     <line x1="700.0" y1="238.9" x2="778.0" y2="276.9" stroke="#30363d" stroke-width="1"/>
     <rect x="778.0" y="269.9" width="85.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="782.0" y="280.4" fill="#f0f6fc" font-size="8.5" font-weight="700">06::CHENNAI</text>
+    <text x="782.0" y="280.4" fill="#f0f6fc" font-size="8.5" font-weight="600">06::CHENNAI</text>
 
     <!-- Node 07: KOLKATA -->
     <circle cx="721.5" cy="210.7" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-1"/>
@@ -1534,7 +1538,7 @@
     <circle cx="721.5" cy="210.7" r="2" fill="#f0f6fc"/>
     <line x1="721.5" y1="210.7" x2="799.5" y2="222.7" stroke="#30363d" stroke-width="1"/>
     <rect x="799.5" y="215.7" width="85.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="803.5" y="226.2" fill="#f0f6fc" font-size="8.5" font-weight="700">07::KOLKATA</text>
+    <text x="803.5" y="226.2" fill="#f0f6fc" font-size="8.5" font-weight="600">07::KOLKATA</text>
 
     <!-- Node 08: BHOPAL -->
     <circle cx="692.4" cy="208.7" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-2"/>
@@ -1543,7 +1547,7 @@
     <circle cx="692.4" cy="208.7" r="2" fill="#f0f6fc"/>
     <line x1="692.4" y1="208.7" x2="692.4" y2="176.7" stroke="#30363d" stroke-width="1"/>
     <rect x="692.4" y="169.7" width="78.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="696.4" y="180.2" fill="#f0f6fc" font-size="8.5" font-weight="700">08::BHOPAL</text>
+    <text x="696.4" y="180.2" fill="#f0f6fc" font-size="8.5" font-weight="600">08::BHOPAL</text>
 
     <!-- Node 09: VELLORE -->
     <circle cx="697.0" cy="239.4" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-3"/>
@@ -1552,7 +1556,7 @@
     <circle cx="697.0" cy="239.4" r="2" fill="#f0f6fc"/>
     <line x1="697.0" y1="239.4" x2="732.0" y2="311.4" stroke="#30363d" stroke-width="1"/>
     <rect x="732.0" y="304.4" width="85.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="736.0" y="314.9" fill="#f0f6fc" font-size="8.5" font-weight="700">09::VELLORE</text>
+    <text x="736.0" y="314.9" fill="#f0f6fc" font-size="8.5" font-weight="600">09::VELLORE</text>
 
     <!-- Node 10: TRIPURA -->
     <circle cx="729.3" cy="207.0" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-1"/>
@@ -1561,7 +1565,7 @@
     <circle cx="729.3" cy="207.0" r="2" fill="#f0f6fc"/>
     <line x1="729.3" y1="207.0" x2="807.3" y2="191.0" stroke="#30363d" stroke-width="1"/>
     <rect x="807.3" y="184.0" width="85.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="811.3" y="194.5" fill="#f0f6fc" font-size="8.5" font-weight="700">10::TRIPURA</text>
+    <text x="811.3" y="194.5" fill="#f0f6fc" font-size="8.5" font-weight="600">10::TRIPURA</text>
 
     <!-- Node 11: MIAMI [USA] -->
     <circle cx="273.6" cy="201.2" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-2"/>
@@ -1570,7 +1574,7 @@
     <circle cx="273.6" cy="201.2" r="2" fill="#f0f6fc"/>
     <line x1="273.6" y1="201.2" x2="203.6" y2="176.2" stroke="#30363d" stroke-width="1"/>
     <rect x="90.6" y="169.2" width="113.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="94.6" y="179.7" fill="#f0f6fc" font-size="8.5" font-weight="700">11::MIAMI [USA]</text>
+    <text x="94.6" y="179.7" fill="#f0f6fc" font-size="8.5" font-weight="600">11::MIAMI [USA]</text>
 
     <!-- Node 12: GERMANY [EU] -->
     <circle cx="514.5" cy="125.8" r="3" fill="none" stroke="#f0f6fc" stroke-width="1" class="pulse-3"/>
@@ -1579,11 +1583,11 @@
     <circle cx="514.5" cy="125.8" r="2" fill="#f0f6fc"/>
     <line x1="514.5" y1="125.8" x2="454.5" y2="97.8" stroke="#30363d" stroke-width="1"/>
     <rect x="334.5" y="90.8" width="120.0" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-    <text x="338.5" y="101.3" fill="#f0f6fc" font-size="8.5" font-weight="700">12::GERMANY [EU]</text>
+    <text x="338.5" y="101.3" fill="#f0f6fc" font-size="8.5" font-weight="600">12::GERMANY [EU]</text>
 
   </g>
 
   <!-- Footer Bar -->
   <rect x="15" y="468" width="970" height="22" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/>
-  <text x="26" y="483" fill="#8b949e" font-size="9.5" font-weight="600" class="mono">// 01: CHANDIGARH [30.73°N 76.78°E] | 12 CLIENT LOCATIONS | GITHUB.COM/NAMANINNOVATES</text>
+  <text x="26" y="483" fill="#8b949e" font-size="9.5" font-weight="500" class="code-mono">// 01: CHANDIGARH [30.73°N 76.78°E] | 12 CLIENT LOCATIONS | GITHUB.COM/NAMANINNOVATES</text>
 </svg>

@@ -51,8 +51,6 @@ CX, CY = 500, 270
 R_MIN = 60
 R_MAX = 195
 
-# GitHub Dark Theme Tokens
-BG_COLOR = "#0d1117"
 PANEL_BG = "#161b22"
 BORDER_DEFAULT = "#30363d"
 BORDER_MUTED = "#21262d"
@@ -63,8 +61,8 @@ svg_lines = []
 svg_lines.append(f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SVG_W} {SVG_H}" width="100%" height="100%">
   <defs>
     <style>
-      .mono {{
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      .code-mono {{
+        font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       }}
       @keyframes radarSweep {{
         from {{ transform: rotate(0deg); }}
@@ -75,21 +73,21 @@ svg_lines.append(f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SVG_W
         animation: radarSweep 8s linear infinite;
       }}
       @keyframes pulseHub {{
-        0% {{ r: 4; opacity: 1; }}
-        100% {{ r: 24; opacity: 0; }}
+        0% {{ r: 4; stroke-opacity: 0.9; }}
+        100% {{ r: 24; stroke-opacity: 0; }}
       }}
       .hub-pulse {{
         animation: pulseHub 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
       }}
     </style>
     <radialGradient id="sweepGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="{TEXT_PRIMARY}" stop-opacity="0.15"/>
+      <stop offset="0%" stop-color="{TEXT_PRIMARY}" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="{TEXT_PRIMARY}" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- GitHub Native Background -->
-  <rect width="{SVG_W}" height="{SVG_H}" fill="{BG_COLOR}" stroke="{BORDER_DEFAULT}" stroke-width="1" rx="6"/>
+  <!-- 100% Transparent Background -->
+  <rect width="{SVG_W}" height="{SVG_H}" rx="6" fill="none" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
 
   <!-- Corner Brackets -->
   <path d="M 25 12 L 15 12 L 15 22" fill="none" stroke="{TEXT_PRIMARY}" stroke-width="1.5"/>
@@ -99,8 +97,8 @@ svg_lines.append(f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SVG_W
 
   <!-- Header Bar -->
   <rect x="15" y="12" width="{SVG_W - 30}" height="32" rx="4" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
-  <text x="28" y="32" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" class="mono" letter-spacing="1">RADIAL RADAR TELEMETRY // 360° POLAR HEATMAP</text>
-  <text x="{SVG_W - 350}" y="32" fill="{TEXT_MUTED}" font-size="10" font-weight="600" class="mono">TOTAL: {total_commits} COMMITS | 52 WEEKS RANGE</text>
+  <text x="28" y="32" fill="{TEXT_PRIMARY}" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">RADIAL RADAR TELEMETRY // 360° POLAR HEATMAP</text>
+  <text x="{SVG_W - 330}" y="32" fill="{TEXT_MUTED}" font-size="10" font-weight="500" class="code-mono">TOTAL: {total_commits} COMMITS | 52 WEEKS RANGE</text>
 
   <!-- Radar Dial Rings (7 Concentric Weekday Orbits) -->
 """)
@@ -123,14 +121,14 @@ for m_idx in range(12):
     svg_lines.append(f'  <line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{BORDER_MUTED}" stroke-width="1"/>\n')
     lx = CX + (R_MAX + 30) * math.cos(angle_rad)
     ly = CY + (R_MAX + 30) * math.sin(angle_rad) + 3.5
-    svg_lines.append(f'  <text x="{lx:.1f}" y="{ly:.1f}" fill="{TEXT_MUTED}" font-size="9" font-weight="700" text-anchor="middle" class="mono">{months[m_idx]}</text>\n')
+    svg_lines.append(f'  <text x="{lx:.1f}" y="{ly:.1f}" fill="{TEXT_MUTED}" font-size="9" font-weight="600" text-anchor="middle" class="code-mono">{months[m_idx]}</text>\n')
 
 deg_labels = [("000°", -90), ("090°", 0), ("180°", 90), ("270°", 180)]
 for d_txt, d_ang in deg_labels:
     a_rad = math.radians(d_ang)
     dx = CX + (R_MIN - 24) * math.cos(a_rad)
     dy = CY + (R_MIN - 24) * math.sin(a_rad) + 3
-    svg_lines.append(f'  <text x="{dx:.1f}" y="{dy:.1f}" fill="{TEXT_MUTED}" font-size="7.5" font-weight="600" text-anchor="middle" class="mono">{d_txt}</text>\n')
+    svg_lines.append(f'  <text x="{dx:.1f}" y="{dy:.1f}" fill="{TEXT_MUTED}" font-size="7.5" font-weight="500" text-anchor="middle" class="code-mono">{d_txt}</text>\n')
 
 svg_lines.append(f"""
   <!-- Rotating Radar Sweep Line -->
@@ -176,21 +174,21 @@ svg_lines.append(f"""  </g>
   <line x1="{CX}" y1="{CY - 8}" x2="{CX}" y2="{CY + 8}" stroke="{TEXT_PRIMARY}" stroke-width="1"/>
 
   <!-- Left & Right Metrics HUD Panels -->
-  <g class="mono">
+  <g class="code-mono">
     <rect x="35" y="180" width="135" height="70" rx="4" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
-    <text x="45" y="200" fill="{TEXT_MUTED}" font-size="8.5" font-weight="600">// SCAN RANGE</text>
+    <text x="45" y="200" fill="{TEXT_MUTED}" font-size="8.5" font-weight="500">// SCAN RANGE</text>
     <text x="45" y="218" fill="{TEXT_PRIMARY}" font-size="13" font-weight="700">360° / 52 WKS</text>
     <text x="45" y="236" fill="{TEXT_MUTED}" font-size="8">RESOLUTION: 7-DAY ORBIT</text>
 
     <rect x="{SVG_W - 170}" y="180" width="135" height="70" rx="4" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
-    <text x="{SVG_W - 160}" y="200" fill="{TEXT_MUTED}" font-size="8.5" font-weight="600">// TOTAL ACTIVITY</text>
+    <text x="{SVG_W - 160}" y="200" fill="{TEXT_MUTED}" font-size="8.5" font-weight="500">// TOTAL ACTIVITY</text>
     <text x="{SVG_W - 160}" y="218" fill="{TEXT_PRIMARY}" font-size="13" font-weight="700">{total_commits} COMMITS</text>
     <text x="{SVG_W - 160}" y="236" fill="{TEXT_MUTED}" font-size="8">MAX PEAK: 65 COMMITS/D</text>
   </g>
 
   <!-- Footer Bar -->
   <rect x="15" y="{SVG_H - 32}" width="{SVG_W - 30}" height="22" rx="3" fill="{PANEL_BG}" stroke="{BORDER_DEFAULT}" stroke-width="1"/>
-  <text x="26" y="{SVG_H - 17}" fill="{TEXT_MUTED}" font-size="9.5" font-weight="600" class="mono">// POLAR TELEMETRY RADAR | RANGE: 0–65 COMMITS | GITHUB.COM/NAMANINNOVATES</text>
+  <text x="26" y="{SVG_H - 17}" fill="{TEXT_MUTED}" font-size="9.5" font-weight="500" class="code-mono">// POLAR TELEMETRY RADAR | RANGE: 0–65 COMMITS | GITHUB.COM/NAMANINNOVATES</text>
 </svg>
 """)
 
@@ -199,4 +197,4 @@ os.makedirs(os.path.dirname(target_path), exist_ok=True)
 with open(target_path, "w") as f:
     f.writelines(svg_lines)
 
-print("Radial Radar SVG updated with GitHub Dark theme tokens at:", target_path)
+print("Transparent Radial Radar SVG updated!")
