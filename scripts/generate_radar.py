@@ -94,9 +94,8 @@ if os.path.exists(frames_dir):
     shutil.rmtree(frames_dir)
 os.makedirs(frames_dir, exist_ok=True)
 
-# Slower, ultra-smooth 96 frames at 20fps (~4.8s per revolution)
 TOTAL_FRAMES = 96
-SWEEP_TRAIL_DEG = 135.0 # Long phosphor persistence across 135 degrees
+SWEEP_TRAIL_DEG = 135.0
 
 months = ["AUG", "SEP", "OCT", "NOV", "DEC", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL"]
 
@@ -111,7 +110,7 @@ for frame_idx in range(TOTAL_FRAMES):
     
     # Header Bar
     draw.rounded_rectangle([(15, 12), (WIDTH - 15, 44)], radius=4, fill=PANEL_BG, outline=BORDER_DEFAULT, width=1)
-    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° PPI LONG-RANGE SCANNER", font=font_mono_sm, fill=TEXT_PRIMARY)
+    draw.text((28, 22), "RADIAL RADAR TELEMETRY // 360° PPI SCANNER", font=font_mono_sm, fill=TEXT_PRIMARY)
     draw.text((WIDTH - 325, 22), f"TOTAL: {total_commits} COMMITS | 52 WEEKS ACTIVE", font=font_mono_xs, fill=TEXT_MUTED)
     
     # Concentric Orbit Rings
@@ -136,7 +135,11 @@ for frame_idx in range(TOTAL_FRAMES):
         ly = CY + (R_MAX + 28) * math.sin(a_rad) - 5
         draw.text((lx - 8, ly), months[m_idx], font=font_mono_xs, fill=TEXT_MUTED)
 
-    # 1. Draw Visible Base Dormant Nodes First (High Visibility)
+    # 1. Dormant Nodes Based on New User Rules
+    # Tier 0 (0 commits): Small resting grid dot
+    # Tier 1 (1-2 commits): Medium glowing node
+    # Tier 2 (3-7 commits): Intense and big radius
+    # Tier 3 (7+ commits): Very high intensity and radius
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
@@ -145,16 +148,14 @@ for frame_idx in range(TOTAL_FRAMES):
             nx, ny = node["x"], node["y"]
             if count == 0:
                 draw.ellipse([(nx - 1.0, ny - 1.0), (nx + 1.0, ny + 1.0)], fill=(33, 38, 45, 255))
-            elif count < 5:
-                draw.ellipse([(nx - 1.6, ny - 1.6), (nx + 1.6, ny + 1.6)], fill=(65, 75, 88, 255))
-            elif count < 15:
-                draw.ellipse([(nx - 2.2, ny - 2.2), (nx + 2.2, ny + 2.2)], fill=(95, 106, 120, 255))
-            elif count < 30:
+            elif count <= 2:
+                draw.ellipse([(nx - 1.8, ny - 1.8), (nx + 1.8, ny + 1.8)], fill=(75, 86, 100, 255))
+            elif count <= 7:
                 draw.ellipse([(nx - 2.8, ny - 2.8), (nx + 2.8, ny + 2.8)], fill=(125, 138, 155, 255))
-            else:
-                draw.ellipse([(nx - 3.4, ny - 3.4), (nx + 3.4, ny + 3.4)], fill=(160, 175, 195, 255))
+            else: # 7+ commits
+                draw.ellipse([(nx - 3.8, ny - 3.8), (nx + 3.8, ny + 3.8)], fill=(185, 200, 220, 255))
 
-    # 2. Phosphor Decay Sweep Sector (Smooth multi-step alpha cone)
+    # 2. Phosphor Decay Sweep Sector
     overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
     ov_draw = ImageDraw.Draw(overlay)
     
@@ -173,12 +174,12 @@ for frame_idx in range(TOTAL_FRAMES):
         p4 = (CX + (R_MIN - 10) * math.cos(t_rad_next), CY + (R_MIN - 10) * math.sin(t_rad_next))
         ov_draw.polygon([p1, p2, p3, p4], fill=(240, 246, 252, alpha))
         
-    # Main Sweep Beam
+    # Main Sweep Beam Line
     beam_x = CX + (R_MAX + 15) * math.cos(sweep_angle_rad)
     beam_y = CY + (R_MAX + 15) * math.sin(sweep_angle_rad)
     ov_draw.line([(CX, CY), (beam_x, beam_y)], fill=(255, 255, 255, 245), width=2)
     
-    # 3. High-Opacity Phosphor Excitation (Smooth Long Persistence Decay)
+    # 3. Active Nodes Based on Exact User Rules during Sweep Contact
     for node in day_nodes:
         ang = node["angle_deg"]
         diff = (sweep_angle_deg - ang) % 360.0
@@ -188,39 +189,42 @@ for frame_idx in range(TOTAL_FRAMES):
             nx, ny = node["x"], node["y"]
             
             if count == 0:
+                # 0 Commits: Small resting grid dot with subtle sweep tick
                 v = int(33 + (85 - 33) * decay)
                 ov_draw.ellipse([(nx - 1.1, ny - 1.1), (nx + 1.1, ny + 1.1)], fill=(v, v, v, 255))
+            elif count <= 2:
+                # 1-2 Commits: Medium glowing node
+                base_radius = 2.2
+                glow_radius = base_radius + 1.2 * decay
+                r_c = int(95 + (230 - 95) * (decay ** 0.8))
+                g_c = int(105 + (240 - 105) * (decay ** 0.8))
+                b_c = int(120 + (255 - 120) * (decay ** 0.8))
+                ov_draw.ellipse([(nx - glow_radius, ny - glow_radius), (nx + glow_radius, ny + glow_radius)], fill=(r_c, g_c, b_c, 255))
+            elif count <= 7:
+                # 3-7 Commits: Intense and big radius
+                base_radius = 3.8
+                glow_radius = base_radius + 2.0 * decay
+                r_c = int(170 + (255 - 170) * (decay ** 0.8))
+                g_c = int(185 + (255 - 185) * (decay ** 0.8))
+                b_c = int(210 + (255 - 210) * (decay ** 0.8))
+                ov_draw.ellipse([(nx - glow_radius, ny - glow_radius), (nx + glow_radius, ny + glow_radius)], fill=(r_c, g_c, b_c, 255))
+                # Outer glow aura
+                if decay > 0.25:
+                    aura_r = glow_radius + 1.5
+                    ov_draw.ellipse([(nx - aura_r, ny - aura_r), (nx + aura_r, ny + aura_r)], outline=(240, 246, 252, int(160 * decay)), width=1)
             else:
-                # High-contrast color curve
-                if count < 5:
-                    base_r, base_g, base_b = 85, 96, 110
-                    base_radius = 1.8
-                elif count < 15:
-                    base_r, base_g, base_b = 130, 142, 160
-                    base_radius = 2.4
-                elif count < 30:
-                    base_r, base_g, base_b = 180, 195, 215
-                    base_radius = 3.2
-                else:
-                    base_r, base_g, base_b = 220, 235, 255
-                    base_radius = 4.2
+                # 7+ Commits: Very high intensity and large radius with flare rays
+                base_radius = 5.6
+                glow_radius = base_radius + 2.6 * decay
+                ov_draw.ellipse([(nx - glow_radius, ny - glow_radius), (nx + glow_radius, ny + glow_radius)], fill=(255, 255, 255, 255))
                 
-                # Interpolate smoothly to pure white at peak contact
-                curr_r = int(base_r + (255 - base_r) * (decay ** 0.8))
-                curr_g = int(base_g + (255 - base_g) * (decay ** 0.8))
-                curr_b = int(base_b + (255 - base_b) * (decay ** 0.8))
-                
-                glow_radius = base_radius + 1.6 * decay
-                ov_draw.ellipse([(nx - glow_radius, ny - glow_radius), (nx + glow_radius, ny + glow_radius)], fill=(curr_r, curr_g, curr_b, 255))
-                
-                # Outer pulse aura for large sprints
-                if count >= 20 and decay > 0.2:
-                    flare_len = 8 + (min(count, 65) / 65.0) * 22.0 * decay
-                    sp_x = CX + (node["r"] + flare_len) * math.cos(node["angle_rad"])
-                    sp_y = CY + (node["r"] + flare_len) * math.sin(node["angle_rad"])
-                    flare_alpha = int(250 * decay)
-                    ov_draw.line([(nx, ny), (sp_x, sp_y)], fill=(240, 246, 252, flare_alpha), width=1)
-                    ov_draw.ellipse([(sp_x - 1.3, sp_y - 1.3), (sp_x + 1.3, sp_y + 1.3)], fill=(255, 255, 255, flare_alpha))
+                # Dynamic flare rays
+                flare_len = 10 + min(count, 45) * 0.7 * decay
+                sp_x = CX + (node["r"] + flare_len) * math.cos(node["angle_rad"])
+                sp_y = CY + (node["r"] + flare_len) * math.sin(node["angle_rad"])
+                flare_alpha = int(255 * decay)
+                ov_draw.line([(nx, ny), (sp_x, sp_y)], fill=(240, 246, 252, flare_alpha), width=2)
+                ov_draw.ellipse([(sp_x - 1.5, sp_y - 1.5), (sp_x + 1.5, sp_y + 1.5)], fill=(255, 255, 255, flare_alpha))
 
     img = Image.alpha_composite(img, overlay)
     draw = ImageDraw.Draw(img)
@@ -255,7 +259,6 @@ for frame_idx in range(TOTAL_FRAMES):
 target_gif = os.path.join(os.path.dirname(__file__), "../assets/radial_radar.gif")
 ffmpeg_bin = "/opt/homebrew/bin/ffmpeg" if os.path.exists("/opt/homebrew/bin/ffmpeg") else "ffmpeg"
 
-# 20fps with 96 frames = 4.8 seconds per cycle (calm, cinematic, smooth)
 subprocess.run([
     ffmpeg_bin, "-y", "-r", "20",
     "-i", f"{frames_dir}/frame_%03d.png",
@@ -264,4 +267,4 @@ subprocess.run([
 ], check=True)
 
 shutil.rmtree(frames_dir)
-print("Smooth, Slow & High-Opacity Radar GIF updated at:", target_gif)
+print("Radar GIF successfully updated with new intensity rules at:", target_gif)
