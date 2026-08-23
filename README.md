@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/global_globe_hud.gif" width="100%" alt="Orbital Command Telemetry Matrix" />
+  <img src="./assets/global_globe_hud.gif" width="100%" alt="Global Collaboration Network Topology" />
 </div>
 
 <br>
@@ -8,7 +8,7 @@
   <h1><code>// ORBITAL COMMAND // NAMAN GUPTA</code></h1>
   <p>
     <a href="https://git.io/typing-svg">
-      <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&duration=3000&pause=1000&color=00F0FF&center=true&vCenter=true&width=620&lines=SYSTEM_ARCHITECT+%2F%2F+FULL-STACK+ENGINEERING;DISTRIBUTED_SYSTEMS+%26+ORBITAL_DATAFLOW;AI_PIPELINES+%26+AUTONOMOUS_WORKFLOWS;HIGH-CONVERSION+UI%2FUX+ARCHITECTURE" alt="Typing SVG" />
+      <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&duration=3000&pause=1000&color=00F0FF&center=true&vCenter=true&width=620&lines=SYSTEM_ARCHITECT+%2F%2F+FULL-STACK+ENGINEERING;DISTRIBUTED_SYSTEMS+%26+GLOBAL_DATAFLOW;AI_PIPELINES+%26+AUTONOMOUS_WORKFLOWS;HIGH-CONVERSION+UI%2FUX+ARCHITECTURE" alt="Typing SVG" />
     </a>
   </p>
 </div>
