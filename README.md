@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/globe_bw.gif" width="100%" alt="Location Topology" />
+  <img src="./assets/global_telemetry_map.svg" width="100%" alt="Locations Map" />
 </div>
 
 <br>
