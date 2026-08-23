@@ -20,12 +20,12 @@
 ### STATS
 
 <p align="center">
-  <img src="https://github-readme-stats-fast.vercel.app/api?username=namaninnovates&show_icons=true&hide_border=false&border_radius=0&bg_color=000000&title_color=ffffff&icon_color=ffffff&text_color=888888&border_color=333333" height="150" alt="Stats" />
-  <img src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=namaninnovates&layout=compact&hide_border=false&border_radius=0&bg_color=000000&title_color=ffffff&text_color=888888&border_color=333333" height="150" alt="Top Languages" />
+  <img src="https://github-readme-stats-fast.vercel.app/api?username=namaninnovates&show_icons=true&hide_border=false&border_radius=6&bg_color=0d1117&title_color=f0f6fc&icon_color=f0f6fc&text_color=8b949e&border_color=30363d" height="150" alt="Stats" />
+  <img src="https://github-readme-stats-fast.vercel.app/api/top-langs/?username=namaninnovates&layout=compact&hide_border=false&border_radius=6&bg_color=0d1117&title_color=f0f6fc&text_color=8b949e&border_color=30363d" height="150" alt="Top Languages" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=namaninnovates&hide_border=false&border_radius=0&background=000000&border=333333&stroke=FFFFFF&ring=FFFFFF&fire=FFFFFF&currStreakNum=FFFFFF&sideNums=888888&currStreakLabel=FFFFFF&sideLabels=888888&dates=555555" alt="Streak" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=namaninnovates&hide_border=false&border_radius=6&background=0d1117&border=30363d&stroke=F0F6FC&ring=F0F6FC&fire=F0F6FC&currStreakNum=F0F6FC&sideNums=8B949E&currStreakLabel=F0F6FC&sideLabels=8B949E&dates=6E7681" alt="Streak" />
 </p>
 
 ---
