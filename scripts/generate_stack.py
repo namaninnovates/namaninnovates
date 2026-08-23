@@ -1,22 +1,23 @@
 import os
 
-WIDTH, HEIGHT = 1000, 110
+WIDTH, HEIGHT = 1000, 155
 PANEL_BG = "#161b22"
 BORDER_DEFAULT = "#30363d"
 TEXT_PRIMARY = "#f0f6fc"
 TEXT_MUTED = "#8b949e"
 
 TECH = [
-    "JAVA", "C / C++", "PYTHON", "TYPESCRIPT", "JAVASCRIPT", "REACT", "NEXT.JS",
-    "NODE.JS", "EXPRESS", "TAILWIND", "DOCKER", "LINUX", "GIT", "FIGMA"
+    "JAVA", "C / C++", "PYTHON", "TYPESCRIPT", "JAVASCRIPT", "REACT",
+    "NEXT.JS", "NODE.JS", "POSTGRESQL", "SUPABASE", "DOCKER", "GCP",
+    "VERCEL", "TAILWIND", "LINUX", "GIT", "FIGMA"
 ]
 
-cols = 7
-chip_w = 132
+cols = 6
+chip_w = 153
 chip_h = 32
 start_x = 22
-start_y = 36
-gap_x = 7
+start_y = 38
+gap_x = 8
 gap_y = 6
 
 svg_lines = []
@@ -33,7 +34,7 @@ svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH
 
   <!-- Header -->
   <text x="24" y="24" fill="{TEXT_PRIMARY}" font-size="11" font-weight="700" class="code-mono" letter-spacing="0.5">TECH STACK</text>
-  <text x="{WIDTH - 120}" y="24" fill="{TEXT_MUTED}" font-size="9" font-weight="500" class="code-mono">14 TECHNOLOGIES</text>
+  <text x="{WIDTH - 120}" y="24" fill="{TEXT_MUTED}" font-size="9" font-weight="500" class="code-mono">{len(TECH)} TECHNOLOGIES</text>
 
   <g class="code-mono">
 ''')
@@ -60,4 +61,4 @@ os.makedirs(os.path.dirname(target_path), exist_ok=True)
 with open(target_path, 'w') as f:
     f.writelines(svg_lines)
 
-print("Clean Tech Stack SVG generated!")
+print("Updated Tech Stack SVG generated successfully with PostgreSQL, GCP, Vercel, Supabase!")
