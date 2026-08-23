@@ -9,6 +9,14 @@
 
 ---
 
+### ACTIVITY TOPOGRAPHY
+
+<div align="center">
+  <img src="./assets/topographic_heatmap.svg" width="100%" alt="52-Week Commit Topography" />
+</div>
+
+---
+
 ### STATS
 
 <p align="center">
