@@ -1,5 +1,64 @@
 import json, os
 
+token = os.environ.get("GITHUB_TOKEN", "")
+headers = {"Authorization": f"Bearer {token}"} if token else {}
+
+query = """
+query {
+  user(login: "namaninnovates") {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+            weekday
+          }
+        }
+      }
+    }
+  }
+}
+"""
+
+try:
+    import urllib.request
+    req = urllib.request.Request(
+        "https://api.github.com/graphql",
+        data=json.dumps({"query": query}).encode("utf-8"),
+        headers={"Content-Type": "application/json", **headers}
+    )
+    with urllib.request.urlopen(req) as resp:
+        raw_data = json.loads(resp.read().decode("utf-8"))
+    cal = raw_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+except Exception as e:
+    fallback_file = os.path.join(os.path.dirname(__file__), "contributions.json")
+    with open(fallback_file, "r") as f:
+        raw_data = json.load(f)
+    cal = raw_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+
+total_commits = cal["totalContributions"]
+days = [d for w in cal["weeks"] for d in w["contributionDays"]]
+
+longest_streak = 0
+temp_streak = 0
+for d in days:
+    if d["contributionCount"] > 0:
+        temp_streak += 1
+        longest_streak = max(longest_streak, temp_streak)
+    else:
+        temp_streak = 0
+
+current_streak = 0
+for d in reversed(days):
+    if d["contributionCount"] > 0:
+        current_streak += 1
+    else:
+        if current_streak == 0:
+            continue
+        break
+
 WIDTH, HEIGHT = 1000, 175
 PANEL_BG = "#161b22"
 BORDER_DEFAULT = "#30363d"
@@ -34,10 +93,10 @@ svg_lines.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH
     <line x1="30" y1="52" x2="310" y2="52" stroke="{BORDER_MUTED}" stroke-width="1"/>
     
     <text x="30" y="80" fill="{TEXT_MUTED}" font-size="10.5">Total Commits:</text>
-    <text x="305" y="80" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">580</text>
+    <text x="305" y="80" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">{total_commits}</text>
     
     <text x="30" y="108" fill="{TEXT_MUTED}" font-size="10.5">Repositories:</text>
-    <text x="305" y="108" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">12</text>
+    <text x="305" y="108" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">33</text>
     
     <text x="30" y="136" fill="{TEXT_MUTED}" font-size="10.5">Global Client Hubs:</text>
     <text x="305" y="136" fill="{TEXT_PRIMARY}" font-size="11.5" font-weight="700" text-anchor="end">15</text>
@@ -78,13 +137,13 @@ svg_lines.append(f'''  </g>
     <line x1="690" y1="52" x2="970" y2="52" stroke="{BORDER_MUTED}" stroke-width="1"/>
     
     <text x="695" y="80" fill="{TEXT_MUTED}" font-size="10.5">Current Streak:</text>
-    <text x="965" y="80" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" text-anchor="end">2 Days</text>
+    <text x="965" y="80" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" text-anchor="end">{current_streak} Days</text>
     
     <text x="695" y="108" fill="{TEXT_MUTED}" font-size="10.5">Longest Streak:</text>
-    <text x="965" y="108" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" text-anchor="end">5 Days</text>
+    <text x="965" y="108" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" text-anchor="end">{longest_streak} Days</text>
     
     <text x="695" y="136" fill="{TEXT_MUTED}" font-size="10.5">Total Activity:</text>
-    <text x="965" y="136" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" text-anchor="end">580 Events</text>
+    <text x="965" y="136" fill="{TEXT_PRIMARY}" font-size="12" font-weight="700" text-anchor="end">{total_commits} Events</text>
   </g>
 </svg>
 ''')
@@ -97,4 +156,4 @@ with open(target_path_fresh, 'w') as f:
 with open(target_path_legacy, 'w') as f:
     f.writelines(svg_lines)
 
-print("Metrics SVG generated with cache-busting filename:", target_path_fresh)
+print("Metrics SVG generated with live total:", total_commits)

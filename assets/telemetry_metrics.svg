@@ -16,10 +16,10 @@
     <line x1="30" y1="52" x2="310" y2="52" stroke="#21262d" stroke-width="1"/>
     
     <text x="30" y="80" fill="#8b949e" font-size="10.5">Total Commits:</text>
-    <text x="305" y="80" fill="#f0f6fc" font-size="11.5" font-weight="700" text-anchor="end">580</text>
+    <text x="305" y="80" fill="#f0f6fc" font-size="11.5" font-weight="700" text-anchor="end">662</text>
     
     <text x="30" y="108" fill="#8b949e" font-size="10.5">Repositories:</text>
-    <text x="305" y="108" fill="#f0f6fc" font-size="11.5" font-weight="700" text-anchor="end">12</text>
+    <text x="305" y="108" fill="#f0f6fc" font-size="11.5" font-weight="700" text-anchor="end">33</text>
     
     <text x="30" y="136" fill="#8b949e" font-size="10.5">Global Client Hubs:</text>
     <text x="305" y="136" fill="#f0f6fc" font-size="11.5" font-weight="700" text-anchor="end">15</text>
@@ -62,12 +62,12 @@
     <line x1="690" y1="52" x2="970" y2="52" stroke="#21262d" stroke-width="1"/>
     
     <text x="695" y="80" fill="#8b949e" font-size="10.5">Current Streak:</text>
-    <text x="965" y="80" fill="#f0f6fc" font-size="12" font-weight="700" text-anchor="end">2 Days</text>
+    <text x="965" y="80" fill="#f0f6fc" font-size="12" font-weight="700" text-anchor="end">6 Days</text>
     
     <text x="695" y="108" fill="#8b949e" font-size="10.5">Longest Streak:</text>
-    <text x="965" y="108" fill="#f0f6fc" font-size="12" font-weight="700" text-anchor="end">5 Days</text>
+    <text x="965" y="108" fill="#f0f6fc" font-size="12" font-weight="700" text-anchor="end">16 Days</text>
     
     <text x="695" y="136" fill="#8b949e" font-size="10.5">Total Activity:</text>
-    <text x="965" y="136" fill="#f0f6fc" font-size="12" font-weight="700" text-anchor="end">580 Events</text>
+    <text x="965" y="136" fill="#f0f6fc" font-size="12" font-weight="700" text-anchor="end">662 Events</text>
   </g>
 </svg>
