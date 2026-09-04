@@ -39,7 +39,7 @@
   <!-- Header Bar -->
   <rect x="15" y="12" width="970" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
   <text x="28" y="32" fill="#f0f6fc" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">RADIAL CONTRIBUTION RADAR // 360° POLAR TELEMETRY</text>
-  <text x="675" y="32" fill="#8b949e" font-size="10" font-weight="500" class="code-mono">TOTAL: 768 COMMITS | 52 WEEKS ACTIVE</text>
+  <text x="675" y="32" fill="#8b949e" font-size="10" font-weight="500" class="code-mono">TOTAL: 769 COMMITS | 52 WEEKS ACTIVE</text>
 
   <!-- 7 Concentric Weekday Orbits -->
   <circle cx="500" cy="270" r="60.0" fill="none" stroke="#21262d" stroke-width="1"/>
@@ -476,7 +476,8 @@
     <circle cx="492.9" cy="210.4" r="2.2" fill="#8b949e"/>
     <circle cx="490.2" cy="188.1" r="2.2" fill="#8b949e"/>
     <circle cx="487.6" cy="165.7" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
-    <circle cx="484.9" cy="143.4" r="1.0" fill="#21262d"/>
+    <circle cx="484.9" cy="143.4" r="2.2" fill="#8b949e"/>
+    <circle cx="482.3" cy="121.1" r="1.0" fill="#21262d"/>
   </g>
 
   <!-- 360° Rotating Radar Sweep Arm & Trailing Phosphor Wedge -->
@@ -503,7 +504,7 @@
 
     <rect x="830" y="180" width="135" height="70" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
     <text x="840" y="200" fill="#8b949e" font-size="8.5" font-weight="500">// TOTAL ACTIVITY</text>
-    <text x="840" y="218" fill="#f0f6fc" font-size="13" font-weight="700">768 COMMITS</text>
+    <text x="840" y="218" fill="#f0f6fc" font-size="13" font-weight="700">769 COMMITS</text>
     <text x="840" y="236" fill="#8b949e" font-size="8">MAX PEAK: 65/DAY</text>
   </g>
 
