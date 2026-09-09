@@ -39,7 +39,7 @@
   <!-- Header Bar -->
   <rect x="15" y="12" width="970" height="32" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
   <text x="28" y="32" fill="#f0f6fc" font-size="12" font-weight="600" class="code-mono" letter-spacing="0.5">RADIAL CONTRIBUTION RADAR // 360° POLAR TELEMETRY</text>
-  <text x="675" y="32" fill="#8b949e" font-size="10" font-weight="500" class="code-mono">TOTAL: 779 COMMITS | 52 WEEKS ACTIVE</text>
+  <text x="675" y="32" fill="#8b949e" font-size="10" font-weight="500" class="code-mono">TOTAL: 754 COMMITS | 52 WEEKS ACTIVE</text>
 
   <!-- 7 Concentric Weekday Orbits -->
   <circle cx="500" cy="270" r="60.0" fill="none" stroke="#21262d" stroke-width="1"/>
@@ -280,7 +280,7 @@
     <circle cx="504.9" cy="352.4" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
     <circle cx="506.2" cy="374.8" r="1.0" fill="#21262d"/>
     <circle cx="507.6" cy="397.3" r="2.2" fill="#8b949e"/>
-    <circle cx="508.9" cy="419.7" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
+    <circle cx="508.9" cy="419.7" r="2.2" fill="#8b949e"/>
     <circle cx="510.2" cy="442.2" r="1.0" fill="#21262d"/>
     <circle cx="488.4" cy="464.7" r="1.0" fill="#21262d"/>
     <circle cx="496.4" cy="329.9" r="1.0" fill="#21262d"/>
@@ -311,7 +311,7 @@
     <circle cx="439.5" cy="407.3" r="1.0" fill="#21262d"/>
     <circle cx="430.5" cy="427.9" r="1.0" fill="#21262d"/>
     <circle cx="400.8" cy="437.9" r="1.0" fill="#21262d"/>
-    <circle cx="469.5" cy="321.7" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
+    <circle cx="469.5" cy="321.7" r="1.0" fill="#21262d"/>
     <circle cx="458.0" cy="341.0" r="1.0" fill="#21262d"/>
     <circle cx="446.6" cy="360.4" r="1.0" fill="#21262d"/>
     <circle cx="435.2" cy="379.8" r="1.0" fill="#21262d"/>
@@ -411,7 +411,7 @@
     <circle cx="427.8" cy="230.2" r="1.0" fill="#21262d"/>
     <circle cx="408.0" cy="219.3" r="2.2" fill="#8b949e"/>
     <circle cx="388.3" cy="208.4" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
-    <circle cx="368.6" cy="197.6" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
+    <circle cx="368.6" cy="197.6" r="2.2" fill="#8b949e"/>
     <circle cx="348.9" cy="186.7" r="1.0" fill="#21262d"/>
     <circle cx="341.6" cy="156.3" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
     <circle cx="451.3" cy="235.0" r="7.5" fill="none" stroke="#f0f6fc" stroke-width="1" opacity="0.4"/>
@@ -444,7 +444,7 @@
     <circle cx="387.4" cy="139.3" r="1.0" fill="#21262d"/>
     <circle cx="391.1" cy="108.3" r="1.0" fill="#21262d"/>
     <circle cx="466.5" cy="220.2" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
-    <circle cx="453.9" cy="201.6" r="2.2" fill="#8b949e"/>
+    <circle cx="453.9" cy="201.6" r="1.0" fill="#21262d"/>
     <circle cx="441.3" cy="182.9" r="1.0" fill="#21262d"/>
     <circle cx="428.8" cy="164.3" r="1.0" fill="#21262d"/>
     <circle cx="416.2" cy="145.6" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
@@ -453,7 +453,8 @@
     <circle cx="472.6" cy="216.6" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
     <circle cx="462.3" cy="196.6" r="1.0" fill="#21262d"/>
     <circle cx="452.1" cy="176.6" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
-    <circle cx="441.8" cy="156.6" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
+    <circle cx="441.8" cy="156.6" r="7.5" fill="none" stroke="#f0f6fc" stroke-width="1" opacity="0.4"/>
+    <circle cx="441.8" cy="156.6" r="5.4" fill="#f0f6fc" class="beacon-high"/>
     <circle cx="431.5" cy="136.6" r="7.5" fill="none" stroke="#f0f6fc" stroke-width="1" opacity="0.4"/>
     <circle cx="431.5" cy="136.6" r="5.4" fill="#f0f6fc" class="beacon-high"/>
     <circle cx="421.2" cy="116.5" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
@@ -474,7 +475,9 @@
     <circle cx="459.5" cy="102.3" r="2.2" fill="#8b949e"/>
     <circle cx="476.9" cy="76.4" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
     <circle cx="492.9" cy="210.4" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
-    <circle cx="490.2" cy="188.1" r="1.0" fill="#21262d"/>
+    <circle cx="490.2" cy="188.1" r="7.5" fill="none" stroke="#f0f6fc" stroke-width="1" opacity="0.4"/>
+    <circle cx="490.2" cy="188.1" r="5.4" fill="#f0f6fc" class="beacon-high"/>
+    <circle cx="487.6" cy="165.7" r="1.0" fill="#21262d"/>
   </g>
 
   <!-- 360° Rotating Radar Sweep Arm & Trailing Phosphor Wedge -->
@@ -501,7 +504,7 @@
 
     <rect x="830" y="180" width="135" height="70" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/>
     <text x="840" y="200" fill="#8b949e" font-size="8.5" font-weight="500">// TOTAL ACTIVITY</text>
-    <text x="840" y="218" fill="#f0f6fc" font-size="13" font-weight="700">779 COMMITS</text>
+    <text x="840" y="218" fill="#f0f6fc" font-size="13" font-weight="700">754 COMMITS</text>
     <text x="840" y="236" fill="#8b949e" font-size="8">MAX PEAK: 65/DAY</text>
   </g>
 
