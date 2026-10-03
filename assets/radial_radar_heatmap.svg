@@ -481,6 +481,7 @@
     <circle cx="487.6" cy="165.7" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
     <circle cx="484.9" cy="143.4" r="2.2" fill="#8b949e"/>
     <circle cx="482.3" cy="121.1" r="3.6" fill="#c9d1d9" class="beacon-mid"/>
+    <circle cx="479.6" cy="98.7" r="1.0" fill="#21262d"/>
   </g>
 
   <!-- 360° Rotating Radar Sweep Arm & Trailing Phosphor Wedge -->
